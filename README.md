@@ -198,3 +198,4 @@ The project is pre-configured with `base: './'` in `vite.config.js` for seamless
 
 Crafted for the **“REIMAGINE SOCIAL”** Frontend Challenge.
 Designed and engineered with passion to demonstrate next-generation community architectures, original UX, and frontend craftsmanship.
+# SYNAPSE-REIMAGINE-SOCIAL
