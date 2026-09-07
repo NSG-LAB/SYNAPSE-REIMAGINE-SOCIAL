@@ -15,6 +15,7 @@ import {
   Zap, 
   Users 
 } from 'lucide-react';
+import { StreakXPWidget } from './StreakXPWidget';
 
 export function ProfileView() {
   const { 
@@ -155,6 +156,9 @@ export function ProfileView() {
           </div>
         </div>
       </div>
+
+      {/* Streak & XP Widget */}
+      <StreakXPWidget />
 
       {/* Tabs */}
       <div

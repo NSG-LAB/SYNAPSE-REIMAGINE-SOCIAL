@@ -15,6 +15,7 @@ import {
   Settings,
   ShieldCheck
 } from 'lucide-react';
+import { StreakXPWidget } from '../profile/StreakXPWidget';
 
 export function Sidebar() {
   const {
@@ -89,6 +90,11 @@ export function Sidebar() {
             <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--color-accent-amber)' }}>{userProfile.stats.sparks}</div>
           </div>
         </div>
+      </div>
+
+      {/* Compact Streak & XP Widget */}
+      <div style={{ marginBottom: '1.25rem' }}>
+        <StreakXPWidget compact />
       </div>
 
       {/* Main Navigation Links */}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { mockUsers } from '../../data/users';
+import { CollabRadar } from '../people/CollabRadar';
 import { Flame, Compass, Award, Users, Plus, Check, ArrowRight, Zap } from 'lucide-react';
 
 export function RightRail() {
@@ -147,62 +148,8 @@ export function RightRail() {
           </div>
         </div>
 
-        {/* Synergy Match Collaborators */}
-        <div
-          className="glass-panel"
-          style={{
-            padding: '1.25rem',
-            borderRadius: 'var(--radius-lg)',
-            background: 'var(--color-bg-surface)'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Users size={15} color="var(--color-accent-emerald)" /> Synergy Match
-            </span>
-            <button
-              onClick={() => setCurrentView('people')}
-              className="btn-ghost"
-              style={{ fontSize: '0.75rem', color: 'var(--color-primary)', padding: 0 }}
-            >
-              All Match
-            </button>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {recommendedPeople.map((p) => (
-              <div key={p.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
-                <button
-                  onClick={() => openModal('profileDetail', p)}
-                  style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', textAlign: 'left', minWidth: 0, flex: 1 }}
-                >
-                  <img
-                    src={p.avatar}
-                    alt={p.name}
-                    style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
-                  />
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {p.name}
-                    </div>
-                    <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      Offers: {p.skillsOffered?.[0] || 'Design'}
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => startConversationWithUser(p)}
-                  className="btn btn-ghost btn-sm"
-                  style={{ fontSize: '0.75rem', padding: '0.25rem 0.5rem', borderRadius: 'var(--radius-full)' }}
-                  title="Say hello"
-                >
-                  Ping
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Smart Collab Radar */}
+        <CollabRadar compact maxResults={3} />
       </div>
     </aside>
   );

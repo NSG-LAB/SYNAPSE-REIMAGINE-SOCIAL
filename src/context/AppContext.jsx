@@ -10,6 +10,16 @@ import { initialNotifications } from '../data/notifications';
 
 const AppContext = createContext(null);
 
+// Default streak data
+const defaultStreakData = {
+  currentStreak: 7,
+  longestStreak: 12,
+  xp: 2890,
+  level: 3,
+  lastActiveDate: new Date().toDateString(),
+  todayActions: { posted: false, commented: 0, joined: false },
+};
+
 export function AppProvider({ children }) {
   // Theme State: 'dark' | 'light' | 'midnight'
   const [theme, setTheme] = useLocalStorage('synapse_theme', 'dark');
@@ -24,6 +34,43 @@ export function AppProvider({ children }) {
 
   // User Profile
   const [userProfile, setUserProfile] = useLocalStorage('synapse_user_profile', initialUser);
+
+  // Streak & XP System
+  const [streakData, setStreakData] = useLocalStorage('synapse_streak_data', defaultStreakData);
+
+  // XP gain helper
+  const gainXP = useCallback((amount, actionType) => {
+    setStreakData(prev => {
+      const today = new Date().toDateString();
+      const isNewDay = prev.lastActiveDate !== today;
+      let newStreak = prev.currentStreak;
+      let todayActions = isNewDay ? { posted: false, commented: 0, joined: false } : { ...prev.todayActions };
+
+      // Update streak
+      if (isNewDay) {
+        const lastDate = new Date(prev.lastActiveDate);
+        const todayDate = new Date(today);
+        const diffDays = Math.floor((todayDate - lastDate) / (1000 * 60 * 60 * 24));
+        newStreak = diffDays === 1 ? prev.currentStreak + 1 : (diffDays === 0 ? prev.currentStreak : 1);
+      }
+
+      // Track today's actions
+      if (actionType === 'post') todayActions.posted = true;
+      if (actionType === 'comment') todayActions.commented += 1;
+      if (actionType === 'join') todayActions.joined = true;
+
+      const newXP = prev.xp + amount;
+      return {
+        ...prev,
+        xp: newXP,
+        level: Math.floor(newXP / 1000) + 1,
+        currentStreak: newStreak,
+        longestStreak: Math.max(prev.longestStreak, newStreak),
+        lastActiveDate: today,
+        todayActions,
+      };
+    });
+  }, [setStreakData]);
 
   // Social Connections & Bookmarks
   const [joinedCommunityIds, setJoinedCommunityIds] = useLocalStorage(
@@ -114,7 +161,8 @@ export function AppProvider({ children }) {
         setCommunities(cList => cList.map(c => c.id === communityId ? { ...c, memberCount: Math.max(0, c.memberCount - 1) } : c));
         return prev.filter(id => id !== communityId);
       } else {
-        addToast(`Joined guild: ${name}! Welcome aboard 🎉`, 'success');
+        gainXP(30, 'join');
+        addToast(`Joined guild: ${name}! +30 XP 🎉`, 'success');
         // Increment community member count
         setCommunities(cList => cList.map(c => c.id === communityId ? { ...c, memberCount: c.memberCount + 1 } : c));
         try {
@@ -123,7 +171,7 @@ export function AppProvider({ children }) {
         return [...prev, communityId];
       }
     });
-  }, [communities, addToast, setCommunities, setJoinedCommunityIds]);
+  }, [communities, addToast, setCommunities, setJoinedCommunityIds, gainXP]);
 
   const createCommunity = useCallback((newComm) => {
     const commId = 'comm-' + Date.now();
@@ -252,8 +300,9 @@ export function AppProvider({ children }) {
       }
       return p;
     }));
-    addToast('Contribution posted to discussion! 💬', 'success');
-  }, [userProfile, setPosts, addToast]);
+    gainXP(15, 'comment');
+    addToast('Contribution posted to discussion! +15 XP 💬', 'success');
+  }, [userProfile, setPosts, addToast, gainXP]);
 
   const createPost = useCallback((postData) => {
     const newPost = {
@@ -284,12 +333,13 @@ export function AppProvider({ children }) {
 
     setPosts(prev => [newPost, ...prev]);
     setLikedPostIds(prev => [...prev, newPost.id]);
-    addToast('New Spark shared with the community! ⚡', 'success');
+    gainXP(50, 'post');
+    addToast('New Spark shared with the community! +50 XP ⚡', 'success');
     closeModal();
     try {
       confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
     } catch (_) {}
-  }, [userProfile, setPosts, setLikedPostIds, addToast, closeModal]);
+  }, [userProfile, setPosts, setLikedPostIds, addToast, closeModal, gainXP]);
 
   // Event & Challenge Interactions
   const toggleJoinEvent = useCallback((eventId) => {
@@ -303,7 +353,8 @@ export function AppProvider({ children }) {
         setEvents(eList => eList.map(e => e.id === eventId ? { ...e, participantsCount: Math.max(0, e.participantsCount - 1) } : e));
         return prev.filter(id => id !== eventId);
       } else {
-        addToast(`Joined ${ev?.type === 'challenge' ? 'challenge' : 'event'}: ${title}! Let's build! 🚀`, 'success');
+        gainXP(40, 'join');
+        addToast(`Joined ${ev?.type === 'challenge' ? 'challenge' : 'event'}: ${title}! +40 XP 🚀`, 'success');
         setEvents(eList => eList.map(e => e.id === eventId ? { ...e, participantsCount: e.participantsCount + 1 } : e));
         try {
           confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 } });
@@ -311,7 +362,7 @@ export function AppProvider({ children }) {
         return [...prev, eventId];
       }
     });
-  }, [events, addToast, setEvents, setJoinedEventIds]);
+  }, [events, addToast, setEvents, setJoinedEventIds, gainXP]);
 
   // People & Following
   const toggleFollowUser = useCallback((userId) => {
@@ -482,7 +533,9 @@ export function AppProvider({ children }) {
     toasts,
     addToast,
     removeToast,
-    resetAllData
+    resetAllData,
+    streakData,
+    gainXP
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

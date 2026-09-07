@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { PersonCard } from '../components/people/PersonCard';
 import { EmptyState } from '../components/common/EmptyState';
+import { SkillConstellation } from '../components/constellation/SkillConstellation';
+import { CollabRadar } from '../components/people/CollabRadar';
 import { mockUsers } from '../data/users';
 import { skillFilters } from '../data/topics';
-import { Users, Search, Sparkles, Filter } from 'lucide-react';
+import { Users, Search, Sparkles, Filter, LayoutGrid, Orbit } from 'lucide-react';
 
 export function PeoplePage() {
   const { userProfile, followedUserIds } = useApp();
@@ -12,6 +14,7 @@ export function PeoplePage() {
   const [selectedSkill, setSelectedSkill] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [onlyConnected, setOnlyConnected] = useState(false);
+  const [viewMode, setViewMode] = useState('list'); // 'list' | 'constellation'
 
   // Exclude current user from people directory
   const directory = mockUsers.filter(u => u.id !== userProfile.id);
@@ -68,6 +71,9 @@ export function PeoplePage() {
         </p>
       </div>
 
+      {/* Collaboration Radar Section */}
+      <CollabRadar />
+
       {/* Control Strip */}
       <div
         className="glass-panel"
@@ -97,8 +103,33 @@ export function PeoplePage() {
           />
         </div>
 
-        {/* Connected Toggle */}
+        {/* View Toggle + Connected Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {/* View Mode Toggle */}
+          <div style={{
+            display: 'flex',
+            borderRadius: 'var(--radius-full)',
+            overflow: 'hidden',
+            border: '1px solid var(--border-medium)',
+          }}>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`btn btn-sm ${viewMode === 'list' ? 'btn-primary' : 'btn-ghost'}`}
+              style={{ borderRadius: 0, padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
+              title="Grid View"
+            >
+              <LayoutGrid size={14} />
+            </button>
+            <button
+              onClick={() => setViewMode('constellation')}
+              className={`btn btn-sm ${viewMode === 'constellation' ? 'btn-primary' : 'btn-ghost'}`}
+              style={{ borderRadius: 0, padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
+              title="Constellation View"
+            >
+              <Orbit size={14} />
+            </button>
+          </div>
+
           <button
             onClick={() => setOnlyConnected(prev => !prev)}
             className={`btn btn-sm ${onlyConnected ? 'btn-primary' : 'btn-secondary'}`}
@@ -109,59 +140,86 @@ export function PeoplePage() {
         </div>
       </div>
 
-      {/* Skill Filter Pills */}
-      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
-        <button
-          onClick={() => setSelectedSkill('All')}
-          className={`btn btn-sm ${selectedSkill === 'All' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ borderRadius: 'var(--radius-full)', padding: '0.35rem 0.85rem', fontSize: '0.8rem', fontWeight: selectedSkill === 'All' ? 700 : 500, flexShrink: 0, whiteSpace: 'nowrap' }}
-        >
-          All Skills
-        </button>
-        {skillFilters.map((skill) => (
-          <button
-            key={skill}
-            onClick={() => setSelectedSkill(skill)}
-            className={`btn btn-sm ${selectedSkill === skill ? 'btn-primary' : 'btn-secondary'}`}
-            style={{
-              borderRadius: 'var(--radius-full)',
-              padding: '0.35rem 0.85rem',
-              fontSize: '0.8rem',
-              fontWeight: selectedSkill === skill ? 700 : 500,
-              flexShrink: 0,
-              whiteSpace: 'nowrap'
-            }}
-          >
-            {skill}
-          </button>
-        ))}
-      </div>
-
-      {/* People Grid */}
-      {filteredPeople.length > 0 ? (
+      {/* Constellation View */}
+      {viewMode === 'constellation' ? (
         <div
+          className="glass-panel"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
-            gap: '1.25rem'
+            borderRadius: 'var(--radius-lg)',
+            padding: '1.25rem',
+            background: 'var(--color-bg-surface)',
+            border: '1px solid var(--border-medium)',
           }}
         >
-          {filteredPeople.map((user) => (
-            <PersonCard key={user.id} user={user} />
-          ))}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.75rem',
+            color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.8rem',
+            textTransform: 'uppercase', letterSpacing: '0.05em'
+          }}>
+            <Orbit size={15} /> Skill Constellation Map
+          </div>
+          <p style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', marginBottom: '1rem', marginTop: 0 }}>
+            Each maker is a star positioned by their skills. Green lines show your skill matches. Click any node to explore.
+          </p>
+          <SkillConstellation />
         </div>
       ) : (
-        <EmptyState
-          icon={Users}
-          title="No Collaborators Match Filter"
-          description="Try broadening your skill search or search query to find more creators."
-          actionLabel="Reset Skill Filters"
-          onAction={() => {
-            setSelectedSkill('All');
-            setSearchQuery('');
-            setOnlyConnected(false);
-          }}
-        />
+        <>
+          {/* Skill Filter Pills */}
+          <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
+            <button
+              onClick={() => setSelectedSkill('All')}
+              className={`btn btn-sm ${selectedSkill === 'All' ? 'btn-primary' : 'btn-secondary'}`}
+              style={{ borderRadius: 'var(--radius-full)', padding: '0.35rem 0.85rem', fontSize: '0.8rem', fontWeight: selectedSkill === 'All' ? 700 : 500, flexShrink: 0, whiteSpace: 'nowrap' }}
+            >
+              All Skills
+            </button>
+            {skillFilters.map((skill) => (
+              <button
+                key={skill}
+                onClick={() => setSelectedSkill(skill)}
+                className={`btn btn-sm ${selectedSkill === skill ? 'btn-primary' : 'btn-secondary'}`}
+                style={{
+                  borderRadius: 'var(--radius-full)',
+                  padding: '0.35rem 0.85rem',
+                  fontSize: '0.8rem',
+                  fontWeight: selectedSkill === skill ? 700 : 500,
+                  flexShrink: 0,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                {skill}
+              </button>
+            ))}
+          </div>
+
+          {/* People Grid */}
+          {filteredPeople.length > 0 ? (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+                gap: '1.25rem'
+              }}
+            >
+              {filteredPeople.map((user) => (
+                <PersonCard key={user.id} user={user} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              icon={Users}
+              title="No Collaborators Match Filter"
+              description="Try broadening your skill search or search query to find more creators."
+              actionLabel="Reset Skill Filters"
+              onAction={() => {
+                setSelectedSkill('All');
+                setSearchQuery('');
+                setOnlyConnected(false);
+              }}
+            />
+          )}
+        </>
       )}
     </div>
   );
