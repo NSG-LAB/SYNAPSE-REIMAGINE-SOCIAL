@@ -127,30 +127,30 @@ export function ProfileView() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 120px), 1fr))',
               gap: '0.75rem',
               paddingTop: '1.25rem',
               borderTop: '1px solid var(--border-subtle)'
             }}
           >
             <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Community Karma</div>
-              <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--color-primary)' }}>{userProfile.stats.karma}</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Community Karma</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-primary)' }}>{userProfile.stats.karma}</div>
             </div>
 
             <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Published Sparks</div>
-              <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--color-accent-amber)' }}>{myPosts.length}</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Published Sparks</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent-amber)' }}>{myPosts.length}</div>
             </div>
 
             <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Challenges Sprinted</div>
-              <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--color-accent-emerald)' }}>{myEvents.length}</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Challenges Sprinted</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent-emerald)' }}>{myEvents.length}</div>
             </div>
 
             <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Guild Memberships</div>
-              <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--color-accent-cyan)' }}>{myGuilds.length}</div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Guild Memberships</div>
+              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent-cyan)' }}>{myGuilds.length}</div>
             </div>
           </div>
         </div>
@@ -164,13 +164,16 @@ export function ProfileView() {
           borderBottom: '1px solid var(--border-subtle)',
           paddingBottom: '0.5rem',
           marginBottom: '1.5rem',
-          overflowX: 'auto'
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
+          maxWidth: '100%'
         }}
       >
         <button
           onClick={() => setActiveTab('sparks')}
           className={`btn btn-sm ${activeTab === 'sparks' ? 'btn-primary' : 'btn-ghost'}`}
-          style={{ borderRadius: 'var(--radius-full)' }}
+          style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
         >
           <Sparkles size={14} /> My Sparks ({myPosts.length})
         </button>
@@ -178,7 +181,7 @@ export function ProfileView() {
         <button
           onClick={() => setActiveTab('guilds')}
           className={`btn btn-sm ${activeTab === 'guilds' ? 'btn-primary' : 'btn-ghost'}`}
-          style={{ borderRadius: 'var(--radius-full)' }}
+          style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
         >
           <Compass size={14} /> Joined Guilds ({myGuilds.length})
         </button>
@@ -186,7 +189,7 @@ export function ProfileView() {
         <button
           onClick={() => setActiveTab('challenges')}
           className={`btn btn-sm ${activeTab === 'challenges' ? 'btn-primary' : 'btn-ghost'}`}
-          style={{ borderRadius: 'var(--radius-full)' }}
+          style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
         >
           <Award size={14} /> Active Sprints ({myEvents.length})
         </button>
@@ -194,7 +197,7 @@ export function ProfileView() {
         <button
           onClick={() => setActiveTab('saved')}
           className={`btn btn-sm ${activeTab === 'saved' ? 'btn-primary' : 'btn-ghost'}`}
-          style={{ borderRadius: 'var(--radius-full)' }}
+          style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
         >
           <Bookmark size={14} /> Saved Sparks ({mySavedPosts.length})
         </button>
@@ -215,7 +218,7 @@ export function ProfileView() {
         )}
 
         {activeTab === 'guilds' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
             {myGuilds.length > 0 ? (
               myGuilds.map(c => <CommunityCard key={c.id} community={c} />)
             ) : (
@@ -227,7 +230,7 @@ export function ProfileView() {
         )}
 
         {activeTab === 'challenges' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
             {myEvents.length > 0 ? (
               myEvents.map(e => <EventCard key={e.id} event={e} />)
             ) : (

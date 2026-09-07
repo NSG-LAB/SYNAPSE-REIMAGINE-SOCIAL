@@ -316,27 +316,39 @@ export function Navbar() {
 
             {/* Profile Dropdown */}
             {profileDropdownOpen && (
-              <div
-                className="glass-panel"
-                style={{
-                  position: 'absolute',
-                  right: 0,
-                  top: 'calc(100% + 8px)',
-                  width: '230px',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '0.75rem',
-                  boxShadow: 'var(--shadow-lg)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.35rem',
-                  zIndex: 950,
-                  animation: 'fadeIn 0.15s ease-out'
-                }}
-              >
-                <div style={{ padding: '0.35rem 0.5rem', borderBottom: '1px solid var(--border-subtle)', marginBottom: '0.25rem' }}>
-                  <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{userProfile.name}</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>@{userProfile.handle}</div>
-                </div>
+              <>
+                <div
+                  onClick={() => setProfileDropdownOpen(false)}
+                  style={{
+                    position: 'fixed',
+                    inset: 0,
+                    zIndex: 940,
+                    background: 'transparent'
+                  }}
+                  aria-hidden="true"
+                />
+                <div
+                  className="glass-panel profile-dropdown-panel"
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: 'calc(100% + 8px)',
+                    width: '230px',
+                    maxWidth: 'calc(100vw - 1.5rem)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '0.75rem',
+                    boxShadow: 'var(--shadow-lg)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.35rem',
+                    zIndex: 950,
+                    animation: 'fadeIn 0.15s ease-out'
+                  }}
+                >
+                  <div style={{ padding: '0.35rem 0.5rem', borderBottom: '1px solid var(--border-subtle)', marginBottom: '0.25rem' }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{userProfile.name}</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>@{userProfile.handle}</div>
+                  </div>
 
                 <button
                   onClick={() => {
@@ -374,8 +386,9 @@ export function Navbar() {
                   Preferences & Settings
                 </button>
               </div>
-            )}
-          </div>
+            </>
+          )}
+        </div>
         </div>
       </div>
 

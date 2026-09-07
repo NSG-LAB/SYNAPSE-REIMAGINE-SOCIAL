@@ -108,7 +108,7 @@ export function CommunitiesPage() {
         </div>
 
         {/* Guild Search Input */}
-        <div style={{ position: 'relative', width: '260px' }}>
+        <div style={{ position: 'relative', width: '100%', maxWidth: '280px', flex: '1 1 200px' }}>
           <Search size={15} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
           <input
             type="text"
@@ -116,13 +116,13 @@ export function CommunitiesPage() {
             onChange={(e) => setFilterQuery(e.target.value)}
             placeholder="Search guilds by name or tag..."
             className="input-field"
-            style={{ paddingLeft: '2.2rem', paddingRight: '0.75rem', paddingTop: '0.4rem', paddingBottom: '0.4rem', fontSize: '0.8125rem' }}
+            style={{ paddingLeft: '2.2rem', paddingRight: '0.75rem', paddingTop: '0.4rem', paddingBottom: '0.4rem', fontSize: '0.8125rem', width: '100%' }}
           />
         </div>
       </div>
 
       {/* Category Pills */}
-      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
         {categories.map((cat) => (
           <button
             key={cat}
@@ -132,7 +132,9 @@ export function CommunitiesPage() {
               borderRadius: 'var(--radius-full)',
               padding: '0.35rem 0.85rem',
               fontSize: '0.8rem',
-              fontWeight: selectedCategory === cat ? 700 : 500
+              fontWeight: selectedCategory === cat ? 700 : 500,
+              flexShrink: 0,
+              whiteSpace: 'nowrap'
             }}
           >
             {cat}
@@ -145,7 +147,7 @@ export function CommunitiesPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
             gap: '1.35rem'
           }}
         >

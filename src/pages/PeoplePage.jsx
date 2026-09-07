@@ -85,7 +85,7 @@ export function PeoplePage() {
         }}
       >
         {/* Search */}
-        <div style={{ position: 'relative', width: '280px' }}>
+        <div style={{ position: 'relative', width: '100%', maxWidth: '300px', flex: '1 1 220px' }}>
           <Search size={15} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
           <input
             type="text"
@@ -93,7 +93,7 @@ export function PeoplePage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by role, skill, or name..."
             className="input-field"
-            style={{ paddingLeft: '2.2rem', fontSize: '0.8125rem', paddingTop: '0.45rem', paddingBottom: '0.45rem' }}
+            style={{ paddingLeft: '2.2rem', fontSize: '0.8125rem', paddingTop: '0.45rem', paddingBottom: '0.45rem', width: '100%' }}
           />
         </div>
 
@@ -110,11 +110,11 @@ export function PeoplePage() {
       </div>
 
       {/* Skill Filter Pills */}
-      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
         <button
           onClick={() => setSelectedSkill('All')}
           className={`btn btn-sm ${selectedSkill === 'All' ? 'btn-primary' : 'btn-secondary'}`}
-          style={{ borderRadius: 'var(--radius-full)', padding: '0.35rem 0.85rem', fontSize: '0.8rem', fontWeight: selectedSkill === 'All' ? 700 : 500 }}
+          style={{ borderRadius: 'var(--radius-full)', padding: '0.35rem 0.85rem', fontSize: '0.8rem', fontWeight: selectedSkill === 'All' ? 700 : 500, flexShrink: 0, whiteSpace: 'nowrap' }}
         >
           All Skills
         </button>
@@ -127,7 +127,9 @@ export function PeoplePage() {
               borderRadius: 'var(--radius-full)',
               padding: '0.35rem 0.85rem',
               fontSize: '0.8rem',
-              fontWeight: selectedSkill === skill ? 700 : 500
+              fontWeight: selectedSkill === skill ? 700 : 500,
+              flexShrink: 0,
+              whiteSpace: 'nowrap'
             }}
           >
             {skill}
@@ -140,7 +142,7 @@ export function PeoplePage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
             gap: '1.25rem'
           }}
         >

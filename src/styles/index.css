@@ -121,6 +121,9 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -131,6 +134,9 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -480,36 +486,50 @@ img {
   }
 }
 
-/* Mobile Layout (< 640px) */
-@media (max-width: 639px) {
+/* Mobile Layout (< 768px) */
+@media (max-width: 767px) {
   :root {
-    --nav-height: 58px;
+    --nav-height: 56px;
   }
 
   .main-layout {
-    padding: 0.65rem 0.5rem 4.75rem 0.5rem;
+    padding: 0.75rem 0.65rem 4.75rem 0.65rem;
     gap: 0.75rem;
+    width: 100%;
+    max-width: 100vw;
   }
 
-  /* When inside messages view on mobile, provide near edge-to-edge feel */
+  /* When inside messages view on mobile, provide 100% edge-to-edge native app feel */
   .main-layout.is-messages {
-    padding: 0.35rem 0.35rem 4.5rem 0.35rem;
+    padding: 0 !important;
+    gap: 0 !important;
   }
 
   /* Button sizing adjustments */
   .btn {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.875rem;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.85rem;
   }
 
   .btn-icon {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
   }
 
   /* Safe margins for inputs */
   .input-field, .textarea-field {
-    font-size: 16px; /* Prevents iOS browser auto-zoom */
+    font-size: 16px !important; /* Strictly prevents iOS browser auto-zoom */
+  }
+}
+
+/* Small Mobile Screens (< 400px: iPhone SE, small Androids) */
+@media (max-width: 399px) {
+  :root {
+    --nav-height: 54px;
+  }
+
+  .main-layout {
+    padding: 0.5rem 0.4rem 4.5rem 0.4rem;
   }
 }

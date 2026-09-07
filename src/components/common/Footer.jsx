@@ -10,7 +10,7 @@ export function Footer() {
       style={{
         borderTop: '1px solid var(--border-subtle)',
         background: 'var(--color-bg-surface)',
-        padding: '3rem 1.5rem 2rem 1.5rem',
+        padding: '2.5rem 1.25rem calc(4.75rem + env(safe-area-inset-bottom, 0px)) 1.25rem',
         marginTop: 'auto'
       }}
     >
@@ -19,7 +19,7 @@ export function Footer() {
           maxWidth: 'var(--max-content-width)',
           margin: '0 auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
           gap: '2.5rem'
         }}
       >

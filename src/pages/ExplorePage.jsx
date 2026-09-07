@@ -113,7 +113,10 @@ export function ExplorePage() {
           borderBottom: '1px solid var(--border-subtle)',
           paddingBottom: '0.5rem',
           marginBottom: '1.5rem',
-          overflowX: 'auto'
+          overflowX: 'auto',
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
+          maxWidth: '100%'
         }}
       >
         {[
@@ -127,23 +130,24 @@ export function ExplorePage() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`btn btn-sm ${activeTab === tab.id ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             {tab.label}
           </button>
         ))}
       </div>
 
-      {/* Content Rendering */}
+      {/* Results Content */}
       {totalMatches === 0 ? (
         <EmptyState
-          title="No Results Found"
-          description={`Nothing in SYNAPSE matched "${searchQuery}". Try different keywords like "shader", "local-first", "photography", or clear the search.`}
-          actionLabel="Clear Search"
+          icon={Search}
+          title="No Match Found"
+          description={`We couldn't find any results matching "${searchQuery}". Try searching with different keywords.`}
+          actionLabel="Clear Search Query"
           onAction={() => setSearchQuery('')}
         />
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
           {/* Sparks Section */}
           {(activeTab === 'all' || activeTab === 'posts') && matchingPosts.length > 0 && (
             <div>
@@ -164,7 +168,7 @@ export function ExplorePage() {
               <h2 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Compass size={18} color="var(--color-accent-cyan)" /> Topic Guilds ({matchingCommunities.length})
               </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
                 {matchingCommunities.slice(0, activeTab === 'all' ? 4 : 20).map(c => (
                   <CommunityCard key={c.id} community={c} />
                 ))}
@@ -178,7 +182,7 @@ export function ExplorePage() {
               <h2 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Award size={18} color="var(--color-accent-amber)" /> Sprints & Jams ({matchingEvents.length})
               </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
                 {matchingEvents.slice(0, activeTab === 'all' ? 3 : 20).map(e => (
                   <EventCard key={e.id} event={e} />
                 ))}
@@ -192,7 +196,7 @@ export function ExplorePage() {
               <h2 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Users size={18} color="var(--color-accent-emerald)" /> Makers & Collaborators ({matchingPeople.length})
               </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: '1.25rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
                 {matchingPeople.slice(0, activeTab === 'all' ? 4 : 20).map(u => (
                   <PersonCard key={u.id} user={u} />
                 ))}

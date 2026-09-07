@@ -27,7 +27,10 @@ export function FilterBar() {
           overflowX: 'auto',
           paddingBottom: '4px',
           maxWidth: '100%',
-          scrollbarWidth: 'none'
+          scrollbarWidth: 'none',
+          WebkitOverflowScrolling: 'touch',
+          flex: '1 1 auto',
+          minWidth: 0
         }}
       >
         {categories.map((cat) => {
@@ -41,7 +44,9 @@ export function FilterBar() {
                 borderRadius: 'var(--radius-full)',
                 padding: '0.35rem 0.85rem',
                 fontSize: '0.8125rem',
-                fontWeight: isSelected ? 700 : 500
+                fontWeight: isSelected ? 700 : 500,
+                flexShrink: 0,
+                whiteSpace: 'nowrap'
               }}
             >
               {cat}

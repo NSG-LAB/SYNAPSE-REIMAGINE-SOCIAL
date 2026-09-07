@@ -81,8 +81,8 @@ function MainContent() {
         )}
       </div>
 
-      {/* Global Footer */}
-      <Footer />
+      {/* Global Footer (Hidden in Messages for native app viewport feel) */}
+      {currentView !== 'messages' && <Footer />}
 
       {/* Mobile Bottom Navigation Bar */}
       <MobileNav />

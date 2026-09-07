@@ -378,8 +378,19 @@ export function MessagesView() {
       {/* Responsive layout styles */}
       <style>{`
         @media (max-width: 768px) {
+          .messages-container {
+            height: calc(100vh - var(--nav-height) - 58px - env(safe-area-inset-bottom, 0px)) !important;
+            height: calc(100dvh - var(--nav-height) - 58px - env(safe-area-inset-bottom, 0px)) !important;
+            min-height: 0 !important;
+            border-radius: 0 !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-top: none !important;
+            border-bottom: none !important;
+          }
           .conv-list-pane {
             width: 100% !important;
+            border-right: none !important;
           }
           .hide-on-mobile-pane {
             display: none !important;

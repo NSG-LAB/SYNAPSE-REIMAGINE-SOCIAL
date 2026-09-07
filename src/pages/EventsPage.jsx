@@ -97,7 +97,7 @@ export function EventsPage() {
       </div>
 
       {/* Category Pills */}
-      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none' }}>
+      <div style={{ display: 'flex', gap: '0.4rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1.5rem', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', maxWidth: '100%' }}>
         {categories.map((cat) => (
           <button
             key={cat}
@@ -107,7 +107,9 @@ export function EventsPage() {
               borderRadius: 'var(--radius-full)',
               padding: '0.35rem 0.85rem',
               fontSize: '0.8rem',
-              fontWeight: selectedCategory === cat ? 700 : 500
+              fontWeight: selectedCategory === cat ? 700 : 500,
+              flexShrink: 0,
+              whiteSpace: 'nowrap'
             }}
           >
             {cat}
@@ -120,7 +122,7 @@ export function EventsPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
             gap: '1.35rem'
           }}
         >
