@@ -71,44 +71,59 @@ export function CommunitiesPage() {
         className="glass-panel"
         style={{
           borderRadius: 'var(--radius-lg)',
-          padding: '1rem 1.25rem',
+          padding: '0.75rem 0.85rem',
           marginBottom: '1.25rem',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '1rem',
+          gap: '0.75rem',
           background: 'var(--color-bg-surface)',
-          border: '1px solid var(--border-subtle)'
+          border: '1px solid var(--border-subtle)',
+          width: '100%',
+          boxSizing: 'border-box'
         }}
       >
-        {/* Tabs */}
-        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+        {/* Tabs with Smooth Touch Scrolling */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '0.4rem',
+            alignItems: 'center',
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+            maxWidth: '100%',
+            flex: '1 1 auto',
+            minWidth: 0,
+            paddingBottom: '2px'
+          }}
+        >
           <button
             onClick={() => setActiveTab('all')}
             className={`btn btn-sm ${activeTab === 'all' ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             All Guilds ({communities.length})
           </button>
           <button
             onClick={() => setActiveTab('joined')}
             className={`btn btn-sm ${activeTab === 'joined' ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             <Check size={13} /> Joined ({joinedCommunityIds.length})
           </button>
           <button
             onClick={() => setActiveTab('hyperactive')}
             className={`btn btn-sm ${activeTab === 'hyperactive' ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             🔥 Most Active
           </button>
         </div>
 
         {/* Guild Search Input */}
-        <div style={{ position: 'relative', width: '100%', maxWidth: '280px', flex: '1 1 200px' }}>
+        <div style={{ position: 'relative', width: '100%', maxWidth: '280px', flex: '1 1 200px', minWidth: 0 }}>
           <Search size={15} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
           <input
             type="text"
@@ -116,7 +131,7 @@ export function CommunitiesPage() {
             onChange={(e) => setFilterQuery(e.target.value)}
             placeholder="Search guilds by name or tag..."
             className="input-field"
-            style={{ paddingLeft: '2.2rem', paddingRight: '0.75rem', paddingTop: '0.4rem', paddingBottom: '0.4rem', fontSize: '0.8125rem', width: '100%' }}
+            style={{ paddingLeft: '2.2rem', paddingRight: '0.75rem', paddingTop: '0.4rem', paddingBottom: '0.4rem', fontSize: '0.8125rem', width: '100%', boxSizing: 'border-box' }}
           />
         </div>
       </div>

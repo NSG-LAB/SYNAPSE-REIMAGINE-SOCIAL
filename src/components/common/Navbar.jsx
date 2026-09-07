@@ -59,6 +59,8 @@ export function Navbar() {
         top: 0,
         zIndex: 900,
         height: 'var(--nav-height)',
+        width: '100%',
+        boxSizing: 'border-box',
         display: 'flex',
         alignItems: 'center',
         borderBottom: '1px solid var(--color-glass-border)',

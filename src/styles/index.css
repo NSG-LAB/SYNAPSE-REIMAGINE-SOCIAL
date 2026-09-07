@@ -427,6 +427,16 @@ img {
   display: flex;
   flex-direction: column;
   background-color: var(--color-bg-base);
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+header {
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
 }
 
 .main-layout {

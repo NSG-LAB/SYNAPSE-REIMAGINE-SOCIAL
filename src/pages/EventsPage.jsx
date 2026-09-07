@@ -31,68 +31,85 @@ export function EventsPage() {
         className="glass-panel"
         style={{
           borderRadius: 'var(--radius-xl)',
-          padding: '2rem',
-          marginBottom: '1.5rem',
+          padding: 'clamp(1.15rem, 3.5vw, 2rem)',
+          marginBottom: '1.25rem',
           background: 'radial-gradient(ellipse at top right, rgba(245, 158, 11, 0.15) 0%, rgba(17, 23, 38, 0.95) 75%)',
           border: '1px solid var(--border-medium)',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          width: '100%',
+          boxSizing: 'border-box'
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-accent-amber)', fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
           <Flame size={16} /> Participatory Social Sprints
         </div>
-        <h1 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 800, lineHeight: 1.2, marginBottom: '0.75rem' }}>
+        <h1 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, lineHeight: 1.2, marginBottom: '0.75rem' }}>
           Connect by Doing: <span className="gradient-text">Challenges & Sprints</span>
         </h1>
-        <p style={{ fontSize: '0.95rem', color: 'var(--color-text-secondary)', maxWidth: '640px', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '0.925rem', color: 'var(--color-text-secondary)', maxWidth: '640px', lineHeight: 1.55 }}>
           Step out of the spectator seat. Join 48-hour jams, 7-day creative code sprints, field photo runs, and open source builds to earn XP and forge lifelong collaborator bonds.
         </p>
       </div>
 
-      {/* Tabs & Controls */}
+      {/* Tabs & Controls with Smooth Touch Scrolling */}
       <div
         className="glass-panel"
         style={{
           borderRadius: 'var(--radius-lg)',
-          padding: '0.85rem 1.25rem',
+          padding: '0.75rem 0.85rem',
           marginBottom: '1.25rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '1rem',
+          gap: '0.75rem',
           background: 'var(--color-bg-surface)',
-          border: '1px solid var(--border-subtle)'
+          border: '1px solid var(--border-subtle)',
+          width: '100%',
+          boxSizing: 'border-box'
         }}
       >
-        <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '0.4rem',
+            alignItems: 'center',
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
+            maxWidth: '100%',
+            flex: '1 1 auto',
+            minWidth: 0,
+            paddingBottom: '2px'
+          }}
+        >
           <button
             onClick={() => setActiveTab('all')}
             className={`btn btn-sm ${activeTab === 'all' ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             All Challenges ({events.length})
           </button>
           <button
             onClick={() => setActiveTab('joined')}
             className={`btn btn-sm ${activeTab === 'joined' ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             <Check size={13} /> Joined By Me ({joinedEventIds.length})
           </button>
           <button
             onClick={() => setActiveTab('weekend')}
             className={`btn btn-sm ${activeTab === 'weekend' ? 'btn-primary' : 'btn-ghost'}`}
-            style={{ borderRadius: 'var(--radius-full)' }}
+            style={{ borderRadius: 'var(--radius-full)', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             ⚡ Fast Jams
           </button>
         </div>
 
-        <div style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
           <Zap size={14} color="var(--color-accent-amber)" />
-          <span>Earn proof-of-work karma on submission</span>
+          <span>Earn proof-of-work karma</span>
         </div>
       </div>
 
