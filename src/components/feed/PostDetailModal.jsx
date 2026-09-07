@@ -163,15 +163,16 @@ export function PostDetailModal() {
           </h4>
 
           {/* New Reply Box */}
-          <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '0.65rem', marginBottom: '1.5rem' }}>
+          <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '0.65rem', marginBottom: '1.5rem', width: '100%', alignItems: 'center' }}>
             <input
               type="text"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="Contribute constructive feedback, solution, or follow-up question..."
               className="input-field"
+              style={{ flex: 1, minWidth: 0, width: 'auto', margin: 0, fontSize: '16px' }}
             />
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" style={{ flexShrink: 0 }}>
               <Send size={16} /> Reply
             </button>
           </form>

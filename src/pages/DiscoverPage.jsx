@@ -7,12 +7,8 @@ import {
   Sparkles, 
   Flame, 
   PlusCircle, 
-  Radio, 
-  Compass, 
-  Award, 
   Users, 
-  ArrowRight,
-  TrendingUp
+  Award 
 } from 'lucide-react';
 
 export function DiscoverPage() {
@@ -21,17 +17,16 @@ export function DiscoverPage() {
     posts, 
     selectedCategory, 
     sortBy, 
-    openModal, 
-    setCurrentView 
+    openModal 
   } = useApp();
 
   const [activeIntent, setActiveIntent] = useState('All');
 
   const intents = [
     { id: 'All', label: 'All Sparks', icon: Sparkles },
-    { id: 'Collab', label: 'Seeking Collabs', icon: Users },
-    { id: 'Sprint', label: 'Live Challenges', icon: Flame },
-    { id: 'Showcase', label: 'Proof of Work', icon: Award }
+    { id: 'Collab', label: 'Collabs', icon: Users },
+    { id: 'Sprint', label: 'Challenges', icon: Flame },
+    { id: 'Showcase', label: 'Showcases', icon: Award }
   ];
 
   // Filtering & Sorting
@@ -61,8 +56,8 @@ export function DiscoverPage() {
         className="glass-panel"
         style={{
           borderRadius: 'var(--radius-xl)',
-          padding: '2rem 2rem 1.75rem 2rem',
-          marginBottom: '1.5rem',
+          padding: 'clamp(1.2rem, 3.5vw, 2rem)',
+          marginBottom: '1.25rem',
           background: 'radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.15) 0%, rgba(17, 23, 38, 0.95) 70%)',
           border: '1px solid var(--border-medium)',
           position: 'relative',
@@ -70,22 +65,22 @@ export function DiscoverPage() {
         }}
       >
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-accent-emerald)', display: 'inline-block', boxShadow: '0 0 10px var(--color-accent-emerald)' }} />
             Welcome back, {userProfile.name.split(' ')[0]}
           </div>
 
-          <h1 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.3rem)', fontWeight: 800, lineHeight: 1.2, marginBottom: '0.75rem' }}>
+          <h1 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.3rem)', fontWeight: 800, lineHeight: 1.25, marginBottom: '0.65rem' }}>
             Where Ideas Turn into <span className="gradient-text">Collaborative Action</span>
           </h1>
 
-          <p style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', maxWidth: '640px', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+          <p style={{ fontSize: '0.925rem', color: 'var(--color-text-secondary)', maxWidth: '640px', lineHeight: 1.55, marginBottom: '1.25rem' }}>
             Discover active builders, participate in 48-hour challenges, join topic guilds, and build real-world creations.
           </p>
 
           {/* Intent Selector Buttons */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Today's Intent:</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
+            <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Intent:</span>
             {intents.map((item) => {
               const Icon = item.icon;
               const isSelected = activeIntent === item.id;
@@ -96,11 +91,11 @@ export function DiscoverPage() {
                   className={`btn btn-sm ${isSelected ? 'btn-primary' : 'btn-secondary'}`}
                   style={{
                     borderRadius: 'var(--radius-full)',
-                    padding: '0.4rem 0.9rem',
-                    fontSize: '0.8125rem'
+                    padding: '0.35rem 0.75rem',
+                    fontSize: '0.78rem'
                   }}
                 >
-                  <Icon size={14} />
+                  <Icon size={13} />
                   {item.label}
                 </button>
               );
@@ -114,10 +109,10 @@ export function DiscoverPage() {
             position: 'absolute',
             top: '-40px',
             right: '-40px',
-            width: '280px',
-            height: '280px',
+            width: '260px',
+            height: '260px',
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, transparent 70%)',
             pointerEvents: 'none'
           }}
         />
@@ -128,45 +123,51 @@ export function DiscoverPage() {
         className="glass-panel"
         style={{
           borderRadius: 'var(--radius-lg)',
-          padding: '1rem 1.25rem',
+          padding: '0.75rem 1rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '1rem',
+          gap: '0.75rem',
           marginBottom: '1rem',
           background: 'var(--color-bg-surface)',
           border: '1px solid var(--border-subtle)'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flex: 1, minWidth: 0 }}>
           <img
             src={userProfile.avatar}
             alt={userProfile.name}
-            style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
+            style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
           />
           <button
             onClick={() => openModal('createPost')}
             className="input-field"
             style={{
-              padding: '0.6rem 1rem',
+              padding: '0.5rem 0.85rem',
               color: 'var(--color-text-muted)',
               textAlign: 'left',
               cursor: 'pointer',
               borderRadius: 'var(--radius-full)',
               background: 'var(--color-bg-elevated)',
-              fontSize: '0.875rem'
+              fontSize: '0.85rem',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              flex: 1,
+              minWidth: 0
             }}
           >
-            Ignite a spark, launch a challenge, or ask a question...
+            Ignite a spark, launch a challenge, or ask...
           </button>
         </div>
 
         <button
           onClick={() => openModal('createPost')}
-          className="btn btn-primary btn-sm"
-          style={{ borderRadius: 'var(--radius-full)' }}
+          className="btn btn-primary btn-sm spark-banner-btn"
+          style={{ borderRadius: 'var(--radius-full)', flexShrink: 0 }}
         >
-          <PlusCircle size={15} /> Post Spark
+          <PlusCircle size={15} />
+          <span className="hide-on-mobile-text">Post Spark</span>
         </button>
       </div>
 
@@ -188,6 +189,17 @@ export function DiscoverPage() {
           />
         )}
       </main>
+
+      <style>{`
+        @media (max-width: 540px) {
+          .hide-on-mobile-text {
+            display: none !important;
+          }
+          .spark-banner-btn {
+            padding: 0.35rem 0.5rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

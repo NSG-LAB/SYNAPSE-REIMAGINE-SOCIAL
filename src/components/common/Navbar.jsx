@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
   Search, 
-  PlusCircle, 
+  Plus, 
   Bell, 
   MessageSquare, 
   Moon, 
@@ -12,9 +12,8 @@ import {
   Users, 
   Award, 
   Settings, 
-  Menu, 
-  X,
-  Radio
+  Radio,
+  X
 } from 'lucide-react';
 
 export function Navbar() {
@@ -31,7 +30,6 @@ export function Navbar() {
     openModal
   } = useApp();
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   const navLinks = [
@@ -44,7 +42,7 @@ export function Navbar() {
 
   const handleNavClick = (viewId) => {
     setCurrentView(viewId);
-    setMobileMenuOpen(false);
+    setProfileDropdownOpen(false);
   };
 
   const toggleTheme = () => {
@@ -64,7 +62,7 @@ export function Navbar() {
         display: 'flex',
         alignItems: 'center',
         borderBottom: '1px solid var(--color-glass-border)',
-        padding: '0 1.25rem'
+        padding: '0 0.85rem'
       }}
     >
       <div
@@ -75,36 +73,37 @@ export function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '1.25rem'
+          gap: '0.75rem'
         }}
       >
         {/* Left: Brand / Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexShrink: 0 }}>
           <button
             onClick={() => handleNavClick('discover')}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
             aria-label="SYNAPSE Home"
           >
             <div
               style={{
-                width: '38px',
-                height: '38px',
+                width: '34px',
+                height: '34px',
                 borderRadius: 'var(--radius-md)',
                 background: 'var(--gradient-brand)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: 'var(--shadow-glow)'
+                boxShadow: 'var(--shadow-glow)',
+                flexShrink: 0
               }}
             >
-              <Radio size={22} color="#ffffff" />
+              <Radio size={18} color="#ffffff" />
             </div>
             <div style={{ textAlign: 'left' }}>
               <span
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontWeight: 800,
-                  fontSize: '1.3rem',
+                  fontSize: '1.2rem',
                   letterSpacing: '-0.03em',
                   background: 'var(--gradient-brand)',
                   WebkitBackgroundClip: 'text',
@@ -116,8 +115,9 @@ export function Navbar() {
                 SYNAPSE
               </span>
               <span
+                className="hide-on-mobile-subtitle"
                 style={{
-                  fontSize: '0.65rem',
+                  fontSize: '0.62rem',
                   fontWeight: 600,
                   letterSpacing: '0.08em',
                   color: 'var(--color-text-muted)',
@@ -161,11 +161,11 @@ export function Navbar() {
           </nav>
         </div>
 
-        {/* Center: Live Instant Search Input */}
+        {/* Center: Live Instant Search Input (Desktop/Tablet) */}
         <div
           style={{
             flex: 1,
-            maxWidth: '380px',
+            maxWidth: '360px',
             position: 'relative',
             display: 'none'
           }}
@@ -196,53 +196,61 @@ export function Navbar() {
             style={{
               paddingLeft: '2.5rem',
               paddingRight: '1rem',
-              paddingTop: '0.5rem',
-              paddingBottom: '0.5rem',
-              fontSize: '0.875rem',
+              paddingTop: '0.45rem',
+              paddingBottom: '0.45rem',
+              fontSize: '0.85rem',
               borderRadius: 'var(--radius-full)'
             }}
             aria-label="Search SYNAPSE platform"
           />
         </div>
 
-        {/* Right: Actions, Notifications, Messages, Profile */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          {/* Create Spark Action */}
+        {/* Right: Actions cluster (Optimized for Mobile width) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
+          {/* Create Spark Action Button */}
           <button
             onClick={() => openModal('createPost')}
-            className="btn btn-primary btn-sm"
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', borderRadius: 'var(--radius-full)' }}
+            className="btn btn-primary btn-sm spark-action-btn"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              borderRadius: 'var(--radius-full)',
+              padding: '0.35rem 0.8rem'
+            }}
+            title="Create New Spark"
           >
-            <PlusCircle size={16} />
+            <Plus size={16} strokeWidth={2.5} />
             <span className="hide-on-mobile">New Spark</span>
           </button>
 
-          {/* Theme Toggle */}
+          {/* Theme Switcher */}
           <button
             onClick={toggleTheme}
             className="btn-icon"
             aria-label={`Toggle theme (Current: ${theme})`}
             title={`Theme: ${theme}`}
+            style={{ width: '36px', height: '36px' }}
           >
-            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
           </button>
 
-          {/* Messages */}
+          {/* Messages (Desktop only - mobile uses bottom nav) */}
           <button
             onClick={() => setCurrentView('messages')}
-            className="btn-icon"
-            style={{ position: 'relative' }}
+            className="btn-icon hide-on-mobile-icon"
+            style={{ position: 'relative', width: '36px', height: '36px' }}
             aria-label={`Messages (${unreadMessagesCount} unread)`}
           >
-            <MessageSquare size={18} />
+            <MessageSquare size={17} />
             {unreadMessagesCount > 0 && (
               <span
                 style={{
                   position: 'absolute',
-                  top: '6px',
-                  right: '6px',
-                  width: '9px',
-                  height: '9px',
+                  top: '5px',
+                  right: '5px',
+                  width: '8px',
+                  height: '8px',
                   borderRadius: 'var(--radius-full)',
                   backgroundColor: 'var(--color-primary)',
                   boxShadow: '0 0 8px var(--color-primary)'
@@ -255,22 +263,22 @@ export function Navbar() {
           <button
             onClick={() => setCurrentView('notifications')}
             className="btn-icon"
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', width: '36px', height: '36px' }}
             aria-label={`Notifications (${unreadNotificationsCount} unread)`}
           >
-            <Bell size={18} />
+            <Bell size={17} />
             {unreadNotificationsCount > 0 && (
               <span
                 style={{
                   position: 'absolute',
-                  top: '5px',
-                  right: '5px',
+                  top: '4px',
+                  right: '4px',
                   background: 'var(--color-accent-rose)',
                   color: '#ffffff',
                   fontSize: '0.65rem',
                   fontWeight: 700,
-                  width: '17px',
-                  height: '17px',
+                  width: '16px',
+                  height: '16px',
                   borderRadius: 'var(--radius-full)',
                   display: 'flex',
                   alignItems: 'center',
@@ -283,15 +291,15 @@ export function Navbar() {
             )}
           </button>
 
-          {/* Profile Trigger */}
+          {/* User Profile Avatar Trigger */}
           <div style={{ position: 'relative' }}>
             <button
               onClick={() => setProfileDropdownOpen(prev => !prev)}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                padding: '3px',
+                justifyContent: 'center',
+                padding: '2px',
                 borderRadius: 'var(--radius-full)',
                 border: '2px solid var(--border-medium)',
                 background: 'var(--color-bg-surface)'
@@ -302,7 +310,7 @@ export function Navbar() {
               <img
                 src={userProfile.avatar}
                 alt={userProfile.name}
-                style={{ width: '32px', height: '32px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
+                style={{ width: '30px', height: '30px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
               />
             </button>
 
@@ -368,78 +376,10 @@ export function Navbar() {
               </div>
             )}
           </div>
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(prev => !prev)}
-            className="btn-icon mobile-menu-toggle"
-            style={{ display: 'none' }}
-            aria-label={mobileMenuOpen ? 'Close navigation' : 'Open navigation'}
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div
-          className="glass-panel mobile-nav-drawer"
-          style={{
-            position: 'absolute',
-            top: 'var(--nav-height)',
-            left: 0,
-            right: 0,
-            background: 'var(--color-bg-surface)',
-            borderBottom: '1px solid var(--border-medium)',
-            padding: '1.25rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.75rem',
-            boxShadow: 'var(--shadow-lg)',
-            zIndex: 990
-          }}
-        >
-          {/* Mobile Search */}
-          <div style={{ position: 'relative', marginBottom: '0.5rem' }}>
-            <Search
-              size={16}
-              color="var(--color-text-muted)"
-              style={{ position: 'absolute', left: '0.9rem', top: '50%', transform: 'translateY(-50%)' }}
-            />
-            <input
-              type="search"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                if (currentView !== 'explore') setCurrentView('explore');
-              }}
-              placeholder="Search SYNAPSE..."
-              className="input-field"
-              style={{ paddingLeft: '2.5rem', fontSize: '0.875rem' }}
-            />
-          </div>
-
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            const isActive = currentView === link.id;
-            return (
-              <button
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className={`btn ${isActive ? 'btn-primary' : 'btn-secondary'}`}
-                style={{ justifyContent: 'flex-start', width: '100%' }}
-              >
-                <Icon size={18} />
-                {link.label}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* Inline styles for responsive Navbar helpers */}
+      {/* Responsive layout CSS rules for header */}
       <style>{`
         @media (min-width: 900px) {
           .desktop-nav-links {
@@ -450,12 +390,23 @@ export function Navbar() {
           }
         }
         @media (max-width: 899px) {
-          .mobile-menu-toggle {
-            display: inline-flex !important;
+          .hide-on-mobile-icon {
+            display: none !important;
           }
         }
-        @media (max-width: 580px) {
+        @media (max-width: 639px) {
           .hide-on-mobile {
+            display: none !important;
+          }
+          .spark-action-btn {
+            padding: 0 !important;
+            width: 36px !important;
+            height: 36px !important;
+            justify-content: center !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hide-on-mobile-subtitle {
             display: none !important;
           }
         }

@@ -337,16 +337,16 @@ export function PostCard({ post }) {
           }}
         >
           {/* Comment input */}
-          <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+          <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', width: '100%', alignItems: 'center' }}>
             <input
               type="text"
               value={commentInput}
               onChange={(e) => setCommentInput(e.target.value)}
               placeholder="Add your insight or question..."
               className="input-field"
-              style={{ fontSize: '0.875rem' }}
+              style={{ fontSize: '0.875rem', flex: 1, minWidth: 0, width: 'auto', margin: 0 }}
             />
-            <button type="submit" className="btn btn-primary btn-sm">
+            <button type="submit" className="btn btn-primary btn-sm" style={{ flexShrink: 0, height: '38px', padding: '0 0.85rem' }}>
               <Send size={15} />
             </button>
           </form>

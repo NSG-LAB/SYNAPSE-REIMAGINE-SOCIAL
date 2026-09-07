@@ -23,15 +23,17 @@ export function MobileNav() {
         left: 0,
         right: 0,
         zIndex: 850,
-        height: '64px',
+        height: 'calc(58px + env(safe-area-inset-bottom, 0px))',
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
         borderTop: '1px solid var(--border-medium)',
         background: 'var(--color-glass-bg)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        padding: '0 0.5rem'
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        paddingLeft: '0.25rem',
+        paddingRight: '0.25rem'
       }}
     >
       {items.map((item) => {
@@ -47,20 +49,32 @@ export function MobileNav() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '2px',
-              padding: '0.4rem',
+              padding: '0.35rem 0',
               color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
               position: 'relative',
-              flex: 1
+              flex: 1,
+              background: 'none'
             }}
           >
-            <div style={{ position: 'relative' }}>
-              <Icon size={20} strokeWidth={isActive ? 2.4 : 1.8} />
+            <div
+              style={{
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '2px 14px',
+                borderRadius: 'var(--radius-full)',
+                backgroundColor: isActive ? 'var(--color-primary-light)' : 'transparent',
+                transition: 'background-color var(--transition-fast)'
+              }}
+            >
+              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.8} color={isActive ? 'var(--color-primary)' : 'currentColor'} />
               {item.badge > 0 && (
                 <span
                   style={{
                     position: 'absolute',
-                    top: '-4px',
-                    right: '-6px',
+                    top: '0px',
+                    right: '8px',
                     width: '8px',
                     height: '8px',
                     borderRadius: 'var(--radius-full)',
@@ -69,7 +83,7 @@ export function MobileNav() {
                 />
               )}
             </div>
-            <span style={{ fontSize: '0.7rem', fontWeight: isActive ? 700 : 500 }}>
+            <span style={{ fontSize: '0.68rem', fontWeight: isActive ? 700 : 500, color: isActive ? 'var(--color-primary)' : 'inherit' }}>
               {item.label}
             </span>
           </button>

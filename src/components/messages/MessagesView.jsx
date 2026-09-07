@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Send, Search, ArrowLeft, Sparkles, Check, CheckCheck } from 'lucide-react';
+import { Send, Search, ArrowLeft, Sparkles, Check, CheckCheck, User } from 'lucide-react';
 
 export function MessagesView() {
   const { 
@@ -56,8 +56,9 @@ export function MessagesView() {
         display: 'flex',
         borderRadius: 'var(--radius-lg)',
         overflow: 'hidden',
-        height: 'calc(100vh - var(--nav-height) - 4rem)',
-        minHeight: '560px',
+        height: 'calc(100vh - var(--nav-height) - 3.75rem)',
+        height: 'calc(100dvh - var(--nav-height) - 4.5rem)',
+        minHeight: '480px',
         border: '1px solid var(--border-subtle)',
         background: 'var(--color-bg-surface)',
         width: '100%',
@@ -78,10 +79,10 @@ export function MessagesView() {
         }}
       >
         {/* Header */}
-        <div style={{ padding: '1.25rem 1rem 0.75rem 1rem', borderBottom: '1px solid var(--border-subtle)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 800 }}>Messages</h2>
-            <span className="badge badge-indigo" style={{ fontSize: '0.7rem' }}>
+        <div style={{ padding: '1rem 0.85rem 0.65rem 0.85rem', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.65rem' }}>
+            <h2 style={{ fontSize: '1.15rem', fontWeight: 800 }}>Messages</h2>
+            <span className="badge badge-indigo" style={{ fontSize: '0.68rem' }}>
               {conversations.length} circles
             </span>
           </div>
@@ -99,7 +100,7 @@ export function MessagesView() {
               className="input-field"
               style={{
                 paddingLeft: '2.2rem',
-                fontSize: '0.8125rem',
+                fontSize: '0.85rem',
                 paddingTop: '0.45rem',
                 paddingBottom: '0.45rem'
               }}
@@ -119,10 +120,10 @@ export function MessagesView() {
                 className="btn-ghost"
                 style={{
                   width: '100%',
-                  padding: '0.85rem 1rem',
+                  padding: '0.75rem 0.85rem',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.75rem',
+                  gap: '0.65rem',
                   justifyContent: 'flex-start',
                   textAlign: 'left',
                   borderBottom: '1px solid var(--border-subtle)',
@@ -135,16 +136,16 @@ export function MessagesView() {
                   <img
                     src={conv.contact.avatar}
                     alt={conv.contact.name}
-                    style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
+                    style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
                   />
                   {conv.contact.online && (
                     <span
                       style={{
                         position: 'absolute',
-                        bottom: '2px',
-                        right: '2px',
-                        width: '10px',
-                        height: '10px',
+                        bottom: '1px',
+                        right: '1px',
+                        width: '9px',
+                        height: '9px',
                         borderRadius: 'var(--radius-full)',
                         backgroundColor: 'var(--color-accent-emerald)',
                         border: '2px solid var(--color-bg-surface)'
@@ -189,18 +190,18 @@ export function MessagesView() {
           {/* Active Chat Header */}
           <div
             style={{
-              padding: '0.85rem 1.25rem',
+              padding: '0.65rem 0.85rem',
               borderBottom: '1px solid var(--border-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
               background: 'var(--color-bg-elevated)',
-              gap: '1rem',
+              gap: '0.5rem',
               minWidth: 0,
               flexShrink: 0
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0, flex: 1 }}>
               <button
                 onClick={() => setShowMobileChat(false)}
                 className="btn-icon mobile-back-btn"
@@ -212,20 +213,20 @@ export function MessagesView() {
 
               <button
                 onClick={() => openModal('profileDetail', activeConv.contact)}
-                style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0, textAlign: 'left' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', minWidth: 0, textAlign: 'left', flex: 1 }}
               >
                 <img
                   src={activeConv.contact.avatar}
                   alt={activeConv.contact.name}
-                  style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
+                  style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
                 />
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontWeight: 700, fontSize: '0.95rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ fontWeight: 700, fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                     {activeConv.contact.name}
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-accent-emerald)', display: 'flex', alignItems: 'center', gap: '5px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--color-accent-emerald)', flexShrink: 0 }} />
-                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{activeConv.contact.role || 'Community Collaborator'}</span>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--color-accent-emerald)', display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--color-accent-emerald)', flexShrink: 0 }} />
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{activeConv.contact.role || 'Collaborator'}</span>
                   </div>
                 </div>
               </button>
@@ -234,9 +235,9 @@ export function MessagesView() {
             <button
               onClick={() => openModal('profileDetail', activeConv.contact)}
               className="btn btn-secondary btn-sm"
-              style={{ borderRadius: 'var(--radius-full)', flexShrink: 0 }}
+              style={{ borderRadius: 'var(--radius-full)', flexShrink: 0, padding: '0.3rem 0.75rem', fontSize: '0.8rem' }}
             >
-              View Profile
+              <span className="hide-on-xs-text">View </span>Profile
             </button>
           </div>
 
@@ -245,12 +246,13 @@ export function MessagesView() {
             style={{
               flex: 1,
               minWidth: 0,
-              padding: '1.25rem',
+              padding: '1rem 0.85rem',
               overflowY: 'auto',
               overflowX: 'hidden',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.85rem'
+              gap: '0.75rem',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             {activeConv.messages.map((msg) => {
@@ -262,19 +264,19 @@ export function MessagesView() {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: isUser ? 'flex-end' : 'flex-start',
-                    maxWidth: '80%',
+                    maxWidth: '85%',
                     alignSelf: isUser ? 'flex-end' : 'flex-start'
                   }}
                 >
                   <div
                     style={{
-                      padding: '0.8rem 1.1rem',
-                      borderRadius: isUser ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+                      padding: '0.7rem 0.95rem',
+                      borderRadius: isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
                       background: isUser ? 'var(--gradient-brand)' : 'var(--color-bg-elevated)',
                       color: isUser ? '#ffffff' : 'var(--color-text-primary)',
                       border: isUser ? 'none' : '1px solid var(--border-medium)',
-                      fontSize: '0.9rem',
-                      lineHeight: 1.5,
+                      fontSize: '0.8875rem',
+                      lineHeight: 1.45,
                       boxShadow: 'var(--shadow-sm)',
                       wordBreak: 'break-word',
                       overflowWrap: 'anywhere'
@@ -282,7 +284,7 @@ export function MessagesView() {
                   >
                     {msg.text}
                   </div>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', marginTop: '3px', padding: '0 4px' }}>
+                  <span style={{ fontSize: '0.68rem', color: 'var(--color-text-muted)', marginTop: '2px', padding: '0 4px' }}>
                     {msg.timestamp}
                   </span>
                 </div>
@@ -295,13 +297,14 @@ export function MessagesView() {
           <div
             style={{
               display: 'flex',
-              gap: '0.5rem',
-              padding: '0.6rem 1.25rem',
+              gap: '0.4rem',
+              padding: '0.45rem 0.85rem',
               overflowX: 'auto',
               borderTop: '1px solid var(--border-subtle)',
               background: 'var(--color-bg-surface)',
               flexShrink: 0,
-              scrollbarWidth: 'none'
+              scrollbarWidth: 'none',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             {quickReplies.map((reply, i) => (
@@ -312,13 +315,13 @@ export function MessagesView() {
                 className="btn btn-secondary btn-sm"
                 style={{
                   fontSize: '0.75rem',
-                  padding: '0.3rem 0.75rem',
+                  padding: '0.25rem 0.65rem',
                   borderRadius: 'var(--radius-full)',
                   whiteSpace: 'nowrap',
                   flexShrink: 0
                 }}
               >
-                <Sparkles size={12} color="var(--color-primary)" />
+                <Sparkles size={11} color="var(--color-primary)" />
                 {reply}
               </button>
             ))}
@@ -328,10 +331,10 @@ export function MessagesView() {
           <form
             onSubmit={handleSend}
             style={{
-              padding: '0.85rem 1.25rem',
+              padding: '0.65rem 0.85rem',
               borderTop: '1px solid var(--border-subtle)',
               display: 'flex',
-              gap: '0.75rem',
+              gap: '0.5rem',
               alignItems: 'center',
               background: 'var(--color-bg-elevated)',
               width: '100%',
@@ -343,13 +346,15 @@ export function MessagesView() {
               type="text"
               value={messageText}
               onChange={(e) => setMessageText(e.target.value)}
-              placeholder={`Message ${activeConv.contact.name}...`}
+              placeholder={`Message ${activeConv.contact.name.split(' ')[0]}...`}
               className="input-field"
               style={{
                 flex: 1,
                 minWidth: 0,
                 width: 'auto',
-                fontSize: '0.875rem',
+                fontSize: '16px',
+                height: '42px',
+                padding: '0 0.85rem',
                 margin: 0
               }}
             />
@@ -357,20 +362,20 @@ export function MessagesView() {
               type="submit"
               className="btn btn-primary"
               aria-label="Send message"
-              style={{ flexShrink: 0, padding: '0.625rem 1.25rem' }}
+              style={{ flexShrink: 0, height: '42px', padding: '0 1rem', borderRadius: 'var(--radius-md)' }}
             >
-              <Send size={16} />
+              <Send size={15} />
               <span>Send</span>
             </button>
           </form>
         </div>
       ) : (
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)' }}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
           Select a conversation to start collaborating
         </div>
       )}
 
-      {/* Responsive pane helpers */}
+      {/* Responsive layout styles */}
       <style>{`
         @media (max-width: 768px) {
           .conv-list-pane {
@@ -381,6 +386,11 @@ export function MessagesView() {
           }
           .mobile-back-btn {
             display: inline-flex !important;
+          }
+        }
+        @media (max-width: 420px) {
+          .hide-on-xs-text {
+            display: none !important;
           }
         }
       `}</style>

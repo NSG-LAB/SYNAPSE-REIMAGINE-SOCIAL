@@ -64,7 +64,7 @@ function MainContent() {
       <Navbar />
 
       {/* Core Responsive 3-Column / 2-Column / Mobile Layout */}
-      <div className="main-layout">
+      <div className={`main-layout ${currentView === 'messages' ? 'is-messages' : ''}`}>
         {/* Left Desktop Sidebar Navigation */}
         <Sidebar />
 
