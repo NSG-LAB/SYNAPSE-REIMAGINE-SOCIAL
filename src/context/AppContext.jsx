@@ -59,7 +59,14 @@ export function AppProvider({ children }) {
   const [notifications, setNotifications] = useLocalStorage('synapse_notifications', initialNotifications);
 
   // Active Chat State
-  const [activeChatId, setActiveChatId] = useState(initialConversations[0]?.id || null);
+  const [activeChatId, setActiveChatIdState] = useState(initialConversations[0]?.id || null);
+
+  const setActiveChatId = useCallback((id) => {
+    setActiveChatIdState(id);
+    if (id) {
+      setConversations(cList => cList.map(c => c.id === id ? { ...c, unreadCount: 0 } : c));
+    }
+  }, [setConversations]);
 
   // Active Modal State: { type: string | null, data: any }
   const [activeModal, setActiveModal] = useState({ type: null, data: null });
