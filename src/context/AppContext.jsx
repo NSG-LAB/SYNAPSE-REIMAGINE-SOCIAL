@@ -167,7 +167,7 @@ export function AppProvider({ children }) {
         setCommunities(cList => cList.map(c => c.id === communityId ? { ...c, memberCount: c.memberCount + 1 } : c));
         try {
           confetti({ particleCount: 35, spread: 60, origin: { y: 0.8 } });
-        } catch (_) {}
+        } catch {}
         return [...prev, communityId];
       }
     });
@@ -200,7 +200,7 @@ export function AppProvider({ children }) {
     closeModal();
     try {
       confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
-    } catch (_) {}
+    } catch {}
   }, [userProfile.name, setCommunities, setJoinedCommunityIds, addToast, closeModal]);
 
   // Post Interactions
@@ -338,7 +338,7 @@ export function AppProvider({ children }) {
     closeModal();
     try {
       confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
-    } catch (_) {}
+    } catch {}
   }, [userProfile, setPosts, setLikedPostIds, addToast, closeModal, gainXP]);
 
   // Event & Challenge Interactions
@@ -358,7 +358,7 @@ export function AppProvider({ children }) {
         setEvents(eList => eList.map(e => e.id === eventId ? { ...e, participantsCount: e.participantsCount + 1 } : e));
         try {
           confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 } });
-        } catch (_) {}
+        } catch {}
         return [...prev, eventId];
       }
     });
@@ -440,7 +440,7 @@ export function AppProvider({ children }) {
     setActiveChatId(newConv.id);
     setCurrentView('messages');
     addToast(`Started conversation with ${user.name}`, 'success');
-  }, [conversations, setConversations, addToast]);
+  }, [conversations, setConversations, setActiveChatId, setCurrentView, addToast]);
 
   // Notifications Interactions
   const markNotificationRead = useCallback((notifId) => {

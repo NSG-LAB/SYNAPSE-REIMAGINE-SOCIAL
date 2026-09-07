@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Send, Search, ArrowLeft, Sparkles, Check, CheckCheck, User } from 'lucide-react';
+import { Send, Search, ArrowLeft, Sparkles } from 'lucide-react';
 
 export function MessagesView() {
   const { 
@@ -56,7 +56,6 @@ export function MessagesView() {
         display: 'flex',
         borderRadius: 'var(--radius-lg)',
         overflow: 'hidden',
-        height: 'calc(100vh - var(--nav-height) - 3.75rem)',
         height: 'calc(100dvh - var(--nav-height) - 4.5rem)',
         minHeight: '480px',
         border: '1px solid var(--border-subtle)',

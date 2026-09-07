@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { UserPlus, UserCheck, MessageSquare, Sparkles, MapPin, Award } from 'lucide-react';
+import { UserPlus, UserCheck, MessageSquare, MapPin } from 'lucide-react';
 
 export function PersonCard({ user }) {
   const { 

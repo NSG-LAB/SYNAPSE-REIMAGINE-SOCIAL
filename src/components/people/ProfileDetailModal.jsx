@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
 import { mockUsers } from '../../data/users';
-import { UserCheck, UserPlus, MessageSquare, MapPin, Sparkles, Award, Compass, Zap } from 'lucide-react';
+import { UserCheck, UserPlus, MessageSquare, MapPin } from 'lucide-react';
 
 export function ProfileDetailModal() {
   const { 

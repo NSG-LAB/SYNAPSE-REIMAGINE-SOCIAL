@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Users, Flame, Check, Plus, Award } from 'lucide-react';
+import { Users, Check, Plus, Award } from 'lucide-react';
 
 export function CommunityCard({ community }) {
   const { joinedCommunityIds, toggleJoinCommunity, openModal } = useApp();

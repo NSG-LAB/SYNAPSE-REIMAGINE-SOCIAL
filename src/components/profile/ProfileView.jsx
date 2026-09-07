@@ -11,9 +11,7 @@ import {
   MapPin, 
   Globe, 
   Calendar, 
-  Edit3, 
-  Zap, 
-  Users 
+  Edit3
 } from 'lucide-react';
 import { StreakXPWidget } from './StreakXPWidget';
 

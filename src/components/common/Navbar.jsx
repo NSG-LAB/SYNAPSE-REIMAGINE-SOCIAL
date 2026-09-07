@@ -12,8 +12,7 @@ import {
   Users, 
   Award, 
   Settings, 
-  Radio,
-  X
+  Radio
 } from 'lucide-react';
 
 export function Navbar() {

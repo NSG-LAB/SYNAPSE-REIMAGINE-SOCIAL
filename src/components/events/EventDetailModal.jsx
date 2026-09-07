@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
-import { Calendar, Clock, MapPin, Users, Zap, Check, Plus, CheckCircle2, Circle } from 'lucide-react';
+import { Calendar, Clock, MapPin, Zap, Check, Plus, CheckCircle2, Circle } from 'lucide-react';
 
 export function EventDetailModal() {
   const { activeModal, closeModal, events, joinedEventIds, toggleJoinEvent, openModal } = useApp();

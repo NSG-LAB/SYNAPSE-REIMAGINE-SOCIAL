@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { CommunityCard } from '../components/communities/CommunityCard';
 import { EmptyState } from '../components/common/EmptyState';
 import { categories } from '../data/topics';
-import { Compass, Plus, Search, Check, Sparkles } from 'lucide-react';
+import { Compass, Plus, Search, Check } from 'lucide-react';
 
 export function CommunitiesPage() {
   const { 

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
 import { mockUsers } from '../../data/users';
-import { Radar, ArrowLeftRight, MessageSquare, UserPlus, Check, Sparkles, Zap } from 'lucide-react';
+import { Radar, ArrowLeftRight, MessageSquare, UserPlus, Check, Zap } from 'lucide-react';
 
 // Calculate match score between two users
 function computeMatchScore(currentUser, otherUser) {

@@ -6,7 +6,7 @@ import { SkillConstellation } from '../components/constellation/SkillConstellati
 import { CollabRadar } from '../components/people/CollabRadar';
 import { mockUsers } from '../data/users';
 import { skillFilters } from '../data/topics';
-import { Users, Search, Sparkles, Filter, LayoutGrid, Orbit } from 'lucide-react';
+import { Users, Search, LayoutGrid, Orbit } from 'lucide-react';
 
 export function PeoplePage() {
   const { userProfile, followedUserIds } = useApp();

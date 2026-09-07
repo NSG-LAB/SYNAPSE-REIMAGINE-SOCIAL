@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { 
-  Bell, 
   CheckCheck, 
   Flame, 
   MessageSquare, 

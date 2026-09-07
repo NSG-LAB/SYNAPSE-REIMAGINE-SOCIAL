@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Calendar, Clock, MapPin, Users, Award, Check, Plus, Zap } from 'lucide-react';
+import { Calendar, MapPin, Users, Check, Plus, Zap } from 'lucide-react';
 
 export function EventCard({ event }) {
   const { joinedEventIds, toggleJoinEvent, openModal } = useApp();

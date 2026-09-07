@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
-import { Heart, Bookmark, Share2, Send, Flame, Sparkles, CheckCircle2, Vote, HelpCircle } from 'lucide-react';
+import { Heart, Bookmark, Share2, Send } from 'lucide-react';
 
 export function PostDetailModal() {
+  const [commentText, setCommentText] = useState('');
   const { 
     activeModal, 
     closeModal, 
@@ -21,7 +22,6 @@ export function PostDetailModal() {
   if (!isOpen || !activeModal.data) return null;
 
   const post = posts.find(p => p.id === activeModal.data.id) || activeModal.data;
-  const [commentText, setCommentText] = useState('');
 
   const isLiked = likedPostIds.includes(post.id);
   const isSaved = savedPostIds.includes(post.id);

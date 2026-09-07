@@ -8,7 +8,10 @@ import {
   Flame, 
   PlusCircle, 
   Users, 
-  Award 
+  Award,
+  Orbit,
+  Radar,
+  ArrowRight
 } from 'lucide-react';
 
 export function DiscoverPage() {
@@ -17,7 +20,9 @@ export function DiscoverPage() {
     posts, 
     selectedCategory, 
     sortBy, 
-    openModal 
+    openModal,
+    setCurrentView,
+    streakData
   } = useApp();
 
   const [activeIntent, setActiveIntent] = useState('All');
@@ -117,6 +122,101 @@ export function DiscoverPage() {
           }}
         />
       </section>
+
+      {/* Innovation Spotlight: Constellation & Collab Radar Quick Access */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: '0.85rem',
+          marginBottom: '1.25rem'
+        }}
+      >
+        {/* Constellation Card */}
+        <div
+          className="glass-panel"
+          onClick={() => setCurrentView('people')}
+          style={{
+            borderRadius: 'var(--radius-lg)',
+            padding: '1.1rem 1.25rem',
+            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%)',
+            border: '1px solid rgba(99, 102, 241, 0.25)',
+            cursor: 'pointer',
+            transition: 'transform var(--transition-fast), border-color var(--transition-fast)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '0.75rem'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0 }}>
+            <div style={{
+              width: '42px', height: '42px', borderRadius: 'var(--radius-md)',
+              background: 'rgba(99, 102, 241, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              border: '1px solid rgba(99, 102, 241, 0.4)', flexShrink: 0
+            }}>
+              <Orbit size={22} color="var(--color-primary)" />
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Interactive 2D Graph
+              </div>
+              <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Skill Constellation Map
+              </div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                Explore makers clustered by skill synergy
+              </div>
+            </div>
+          </div>
+          <ArrowRight size={16} color="var(--color-primary)" style={{ flexShrink: 0 }} />
+        </div>
+
+        {/* Collab Radar & Streak Card */}
+        <div
+          className="glass-panel"
+          onClick={() => setCurrentView('people')}
+          style={{
+            borderRadius: 'var(--radius-lg)',
+            padding: '1.1rem 1.25rem',
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.06) 100%)',
+            border: '1px solid rgba(16, 185, 129, 0.25)',
+            cursor: 'pointer',
+            transition: 'transform var(--transition-fast), border-color var(--transition-fast)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '0.75rem'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0 }}>
+            <div style={{
+              width: '42px', height: '42px', borderRadius: 'var(--radius-md)',
+              background: 'rgba(16, 185, 129, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              border: '1px solid rgba(16, 185, 129, 0.4)', flexShrink: 0
+            }}>
+              <Radar size={22} color="var(--color-accent-emerald)" />
+            </div>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--color-accent-emerald)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Smart Matchmaking
+                </span>
+                <span style={{ fontSize: '0.65rem', fontWeight: 800, padding: '0.1rem 0.4rem', borderRadius: 'var(--radius-full)', background: 'rgba(249, 115, 22, 0.15)', color: '#f97316' }}>
+                  🔥 {streakData?.currentStreak || 7}d streak
+                </span>
+              </div>
+              <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                Collaboration Radar
+              </div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                {streakData?.xp || 2890} XP · Lv.{Math.floor((streakData?.xp || 2890) / 1000) + 1} Maker
+              </div>
+            </div>
+          </div>
+          <ArrowRight size={16} color="var(--color-accent-emerald)" style={{ flexShrink: 0 }} />
+        </div>
+      </div>
 
       {/* Quick Action Banner */}
       <div

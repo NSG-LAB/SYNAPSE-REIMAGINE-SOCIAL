@@ -10,7 +10,6 @@ import {
   HelpCircle, 
   CheckCircle2, 
   Send,
-  ExternalLink,
   Vote
 } from 'lucide-react';
 

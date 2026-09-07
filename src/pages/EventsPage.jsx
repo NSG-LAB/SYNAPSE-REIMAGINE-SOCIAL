@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import { EventCard } from '../components/events/EventCard';
 import { EmptyState } from '../components/common/EmptyState';
 import { categories } from '../data/topics';
-import { Award, Flame, Calendar, Check, Zap } from 'lucide-react';
+import { Award, Flame, Check, Zap } from 'lucide-react';
 
 export function EventsPage() {
   const { events, joinedEventIds } = useApp();

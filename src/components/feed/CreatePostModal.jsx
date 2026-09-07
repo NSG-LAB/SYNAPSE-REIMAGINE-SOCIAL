@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
-import { Sparkles, Flame, Vote, CheckCircle2, HelpCircle, Image, Plus, Trash2 } from 'lucide-react';
+import { Sparkles, Flame, Vote, CheckCircle2, HelpCircle, Plus, Trash2 } from 'lucide-react';
 
 export function CreatePostModal() {
   const { activeModal, closeModal, createPost, communities } = useApp();

@@ -6,7 +6,7 @@ import { EventCard } from '../components/events/EventCard';
 import { PersonCard } from '../components/people/PersonCard';
 import { EmptyState } from '../components/common/EmptyState';
 import { mockUsers } from '../data/users';
-import { Search, Sparkles, Compass, Award, Users, Filter } from 'lucide-react';
+import { Search, Sparkles, Compass, Award, Users } from 'lucide-react';
 
 export function ExplorePage() {
   const { 

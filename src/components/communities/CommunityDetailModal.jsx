@@ -2,7 +2,7 @@ import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
 import { PostCard } from '../feed/PostCard';
-import { Users, Flame, Check, Plus, Award, ShieldAlert, Sparkles, PlusCircle } from 'lucide-react';
+import { Check, Plus, Award, ShieldAlert, Sparkles, PlusCircle } from 'lucide-react';
 
 export function CommunityDetailModal() {
   const { 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { Sparkles, Heart, Globe, Terminal, Shield, Zap } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 export function Footer() {
   const { setCurrentView } = useApp();

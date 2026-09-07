@@ -1,8 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { mockUsers } from '../../data/users';
 import { CollabRadar } from '../people/CollabRadar';
-import { Flame, Compass, Award, Users, Plus, Check, ArrowRight, Zap } from 'lucide-react';
+import { Flame, Compass, Plus, Check, Zap } from 'lucide-react';
 
 export function RightRail() {
   const { 
@@ -11,13 +10,11 @@ export function RightRail() {
     joinedCommunityIds, 
     toggleJoinCommunity, 
     openModal, 
-    setCurrentView, 
-    startConversationWithUser 
+    setCurrentView 
   } = useApp();
 
   const trendingCommunities = communities.slice(0, 3);
   const upcomingChallenges = events.slice(0, 3);
-  const recommendedPeople = mockUsers.slice(1, 4);
 
   return (
     <aside aria-label="Discovery & Recommendations" className="right-rail">

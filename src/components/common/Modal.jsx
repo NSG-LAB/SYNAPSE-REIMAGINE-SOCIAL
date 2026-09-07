@@ -51,8 +51,7 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = '640px' }) 
         style={{
           width: '100%',
           maxWidth,
-          maxHeight: '92vh',
-          maxHeight: '92dvh',
+          maxHeight: 'min(92vh, 92dvh)',
           display: 'flex',
           flexDirection: 'column',
           borderRadius: 'var(--radius-lg)',

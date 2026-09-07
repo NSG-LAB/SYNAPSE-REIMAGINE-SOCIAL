@@ -8,12 +8,9 @@ import {
   Search, 
   MessageSquare, 
   Bell, 
-  Bookmark, 
   UserCheck, 
   Plus, 
-  Flame,
-  Settings,
-  ShieldCheck
+  Settings
 } from 'lucide-react';
 import { StreakXPWidget } from '../profile/StreakXPWidget';
 

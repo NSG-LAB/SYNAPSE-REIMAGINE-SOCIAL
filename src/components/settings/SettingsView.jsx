@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Moon, Sun, Monitor, Shield, Bell, Database, RotateCcw, Check } from 'lucide-react';
+import { Moon, Sun, Monitor, Shield, Database, RotateCcw, Check } from 'lucide-react';
 
 export function SettingsView() {
   const { theme, setTheme, resetAllData, addToast } = useApp();
 
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [collaborationOpen, setCollaborationOpen] = useState(true);
-  const [compactDensity, setCompactDensity] = useState(false);
 
   const handleToggle = (setter, label) => {
     setter(prev => {

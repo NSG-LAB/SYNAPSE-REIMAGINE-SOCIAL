@@ -36,7 +36,7 @@ function getSkillMatches(userA, userB) {
 // Simple force-directed positioning
 function computePositions(users, width, height) {
   const rng = seededRandom(42);
-  const positions = users.map((u, i) => ({
+  const positions = users.map(u => ({
     id: u.id,
     x: width * 0.15 + rng() * width * 0.7,
     y: height * 0.15 + rng() * height * 0.7,
