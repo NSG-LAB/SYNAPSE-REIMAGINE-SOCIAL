@@ -2,13 +2,17 @@
 
 > **A Next-Generation Social Community Platform Built on Purposeful Participation, Collaborative Sprints, and Skill Synergy.**
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-22c55e.svg?style=for-the-badge&logo=github)](https://nsg-lab.github.io/SYNAPSE-REIMAGINE-SOCIAL/)
 [![Built with React](https://img.shields.io/badge/Built%20with-React%2019-61dafb.svg)](https://react.dev/)
 [![Bundled with Vite](https://img.shields.io/badge/Bundled%20with-Vite%208-646cff.svg)](https://vitejs.dev/)
-[![Tested with Vitest](https://img.shields.io/badge/Tested%20with-Vitest%205-facc15.svg)](https://vitest.dev/)
+[![Tested with Vitest](https://img.shields.io/badge/Tested%20with-Vitest%20(42%20tests)-facc15.svg)](https://vitest.dev/)
+[![Axe Accessibility](https://img.shields.io/badge/Axe%20DevTools-0%20Violations-10b981.svg)](https://www.deque.com/axe/)
 [![Linted with Oxlint](https://img.shields.io/badge/Lint-Oxlint%20(0%20warnings)-10b981.svg)](https://oxc.rs/)
 [![Styling](https://img.shields.io/badge/Styling-Vanilla%20CSS%20Design%20System-38bdf8.svg)](./src/styles/index.css)
 [![Persistence](https://img.shields.io/badge/Persistence-HTML5%20LocalStorage-10b981.svg)](./src/hooks/useLocalStorage.js)
 [![Challenge](https://img.shields.io/badge/Submission-REIMAGINE%20SOCIAL%20Challenge-f43f5e.svg)](#)
+
+> 🚀 **Experience the Live App**: [https://nsg-lab.github.io/SYNAPSE-REIMAGINE-SOCIAL/](https://nsg-lab.github.io/SYNAPSE-REIMAGINE-SOCIAL/)
 
 ---
 
@@ -205,7 +209,9 @@ src/
    ```bash
    npm test
    ```
-   Runs 9 test suites and 36 automated tests via Vitest & React Testing Library:
+   Runs 11 test suites and 42 automated tests via Vitest & React Testing Library:
+   - `liveFlowSimulation.test.jsx`: End-to-end keyboard journey (Discover -> PostCard Enter -> Dialog open -> Poll vote -> Escape -> Focus restoration) & Skill Constellation screen reader live region announcements.
+   - `axeAccessibility.test.jsx`: Automated Axe DevTools scan across Modal, EmptyState, OnboardingBanner, and PostCard (0 critical or serious violations).
    - `Modal.test.jsx`: Dialog ARIA attributes, Escape handling, Tab focus trap wrapping, and trigger focus restoration.
    - `PostCard.test.jsx`: Keyboard accessible button wrappers, Enter/Space activation, inline poll voting, and bookmark toggling.
    - `SafeImage.test.jsx`: Image loading, graceful error fallback, and dynamic SVG gradient placeholder generation.
