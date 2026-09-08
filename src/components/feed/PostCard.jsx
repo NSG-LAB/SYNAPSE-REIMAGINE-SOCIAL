@@ -111,7 +111,7 @@ export function PostCard({ post }) {
               <span>in</span>
               <button
                 onClick={() => openModal('communityDetail', { id: post.communityId, name: post.communityName })}
-                style={{ color: 'var(--color-primary)', fontWeight: 600 }}
+                style={{ color: 'var(--color-primary-text)', fontWeight: 600 }}
               >
                 {post.communityName}
               </button>

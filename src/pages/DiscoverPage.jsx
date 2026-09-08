@@ -75,7 +75,7 @@ export function DiscoverPage() {
         }}
       >
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-primary-text)', fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-accent-emerald)', display: 'inline-block', boxShadow: '0 0 10px var(--color-accent-emerald)' }} />
             Welcome back, {userProfile.name.split(' ')[0]}
           </div>
@@ -163,7 +163,7 @@ export function DiscoverPage() {
               <Orbit size={22} color="var(--color-primary)" />
             </div>
             <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--color-primary-text)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 Interactive 2D Graph
               </div>
               <div style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--color-text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -248,6 +248,7 @@ export function DiscoverPage() {
           />
           <button
             onClick={() => openModal('createPost')}
+            aria-label="Ignite a spark, launch a challenge, or ask a question"
             className="input-field"
             style={{
               padding: '0.5rem 0.85rem',
@@ -270,6 +271,7 @@ export function DiscoverPage() {
 
         <button
           onClick={() => openModal('createPost')}
+          aria-label="Post a new Spark"
           className="btn btn-primary btn-sm spark-banner-btn"
           style={{ borderRadius: 'var(--radius-full)', flexShrink: 0 }}
         >

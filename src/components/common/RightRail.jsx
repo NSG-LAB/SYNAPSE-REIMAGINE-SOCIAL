@@ -29,7 +29,7 @@ export function RightRail() {
             border: '1px solid rgba(99, 102, 241, 0.25)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-primary)', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--color-primary-text)', fontWeight: 800, fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.4rem' }}>
             <Zap size={14} /> The SYNAPSE Ethos
           </div>
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, margin: 0 }}>
@@ -53,7 +53,7 @@ export function RightRail() {
             <button
               onClick={() => setCurrentView('communities')}
               className="btn-ghost"
-              style={{ fontSize: '0.75rem', color: 'var(--color-primary)', padding: 0 }}
+              style={{ fontSize: '0.75rem', color: 'var(--color-primary-text)', padding: 0 }}
             >
               See all
             </button>
@@ -108,7 +108,7 @@ export function RightRail() {
             <button
               onClick={() => setCurrentView('events')}
               className="btn-ghost"
-              style={{ fontSize: '0.75rem', color: 'var(--color-primary)', padding: 0 }}
+              style={{ fontSize: '0.75rem', color: 'var(--color-primary-text)', padding: 0 }}
             >
               Explore
             </button>

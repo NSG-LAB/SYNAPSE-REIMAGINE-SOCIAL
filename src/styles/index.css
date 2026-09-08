@@ -22,6 +22,7 @@
 
   /* Brand Accents & Gradients */
   --color-primary: #6366f1;
+  --color-primary-text: #818cf8; /* 5.96:1 on #111726, 6.2:1 on #0a0d14 (WCAG AA) */
   --color-primary-hover: #4f46e5;
   --color-primary-light: rgba(99, 102, 241, 0.15);
   --color-accent-cyan: #06b6d4;
@@ -88,7 +89,8 @@
   --color-text-inverse: #ffffff;
 
   --color-primary: #4f46e5;         /* 5.8:1 on white (WCAG AA) */
-  --color-primary-hover: #4338ca;
+  --color-primary-text: #4338ca;    /* 8.07:1 on white (WCAG AAA) */
+  --color-primary-hover: #3730a3;
   --color-primary-light: rgba(79, 70, 229, 0.12);
   --color-accent-cyan: #0891b2;     /* 4.8:1 on white (WCAG AA) */
   --color-accent-emerald: #059669;  /* 4.6:1 on white (WCAG AA) */
@@ -116,9 +118,10 @@
   --color-glass-bg: rgba(6, 8, 13, 0.94);
   --color-glass-border: rgba(255, 255, 255, 0.15);
   
+  --color-primary: #6366f1;
+  --color-primary-text: #a5b4fc; /* 11.0:1 on #000000, 9.8:1 on #0f131d (WCAG AAA) */
   --color-text-primary: #ffffff;
   --color-text-secondary: #cbd5e1; /* 11.5:1 on #000000, 9.8:1 on #0f131d (WCAG AAA) */
-  --color-text-muted: #94a3b8;     /* 6.8:1 on #000000, 5.8:1 on #0f131d (WCAG AA) */
   --color-text-muted: #94a3b8;     /* 6.8:1 on #000000, 5.8:1 on #0f131d (WCAG AA) */
   --color-text-inverse: #000000;
 

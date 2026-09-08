@@ -156,6 +156,7 @@ export function Navbar() {
           <button
             onClick={() => openModal('createPost')}
             className="btn btn-primary btn-sm spark-action-btn"
+            aria-label="Create New Spark"
             style={{
               display: 'flex',
               alignItems: 'center',

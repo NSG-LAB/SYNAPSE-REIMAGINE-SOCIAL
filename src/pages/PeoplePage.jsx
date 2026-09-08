@@ -155,7 +155,7 @@ export function PeoplePage() {
         >
           <div style={{
             display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.75rem',
-            color: 'var(--color-primary)', fontWeight: 700, fontSize: '0.8rem',
+            color: 'var(--color-primary-text)', fontWeight: 700, fontSize: '0.8rem',
             textTransform: 'uppercase', letterSpacing: '0.05em'
           }}>
             <Orbit size={15} /> Skill Constellation Map
