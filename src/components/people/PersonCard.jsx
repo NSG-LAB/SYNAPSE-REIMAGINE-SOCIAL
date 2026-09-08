@@ -3,6 +3,14 @@ import { useApp } from '../../context/AppContext';
 import { SafeImage } from '../common/SafeImage';
 import { UserPlus, UserCheck, MessageSquare, MapPin } from 'lucide-react';
 
+/**
+ * PersonCard displays user avatar, name, handle, bio, and follow/message buttons.
+ * Fully keyboard accessible with semantic buttons for profile view and interactions.
+ *
+ * @param {Object} props
+ * @param {import('../../data/mockData').User} props.user - User data object
+ * @returns {React.ReactElement}
+ */
 export function PersonCard({ user }) {
   const { 
     followedUserIds, 
@@ -15,15 +23,14 @@ export function PersonCard({ user }) {
 
   return (
     <div
-      className="glass-panel person-card"
+      className="glass-panel card-interactive person-card"
       style={{
         borderRadius: 'var(--radius-lg)',
         padding: '1.25rem',
         background: 'var(--color-bg-surface)',
         border: '1px solid var(--border-subtle)',
         display: 'flex',
-        flexDirection: 'column',
-        transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
+        flexDirection: 'column'
       }}
     >
       {/* Header */}

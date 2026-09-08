@@ -151,7 +151,12 @@ export function EventsPage() {
         <EmptyState
           icon={Award}
           title="No Sprints Found"
-          description={`No active events match category "${selectedCategory}". Check back soon or browse other categories!`}
+          description={`No active events match category "${selectedCategory}". Try selecting another category or resetting filters!`}
+          actionLabel="Reset Sprints Filter"
+          onAction={() => {
+            setSelectedCategory('All');
+            setActiveTab('all');
+          }}
         />
       )}
     </div>

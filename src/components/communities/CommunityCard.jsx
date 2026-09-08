@@ -3,39 +3,36 @@ import { useApp } from '../../context/AppContext';
 import { SafeImage } from '../common/SafeImage';
 import { Users, Check, Plus, Award } from 'lucide-react';
 
+/**
+ * CommunityCard displays guild metadata, member count, category, and join/view actions.
+ * Fully keyboard accessible with semantic buttons for modal trigger and join action.
+ *
+ * @param {Object} props
+ * @param {import('../../data/mockData').Community} props.community - Guild data object
+ * @returns {React.ReactElement}
+ */
 export function CommunityCard({ community }) {
   const { joinedCommunityIds, toggleJoinCommunity, openModal } = useApp();
   const isJoined = joinedCommunityIds.includes(community.id);
 
   return (
     <div
-      className="glass-panel community-card"
+      className="glass-panel card-interactive community-card"
       style={{
         borderRadius: 'var(--radius-lg)',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--color-bg-surface)',
-        border: '1px solid var(--border-subtle)',
-        transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
+        border: '1px solid var(--border-subtle)'
       }}
     >
       {/* Cover Image */}
       <button
         type="button"
+        className="card-cover-btn"
         aria-label={`View ${community.name} guild details`}
-        style={{
-          height: '110px',
-          width: '100%',
-          position: 'relative',
-          background: 'var(--color-bg-elevated)',
-          overflow: 'hidden',
-          cursor: 'pointer',
-          border: 'none',
-          padding: 0,
-          display: 'block',
-          textAlign: 'left'
-        }}
+        style={{ height: '110px' }}
         onClick={() => openModal('communityDetail', community)}
       >
         <SafeImage

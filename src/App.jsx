@@ -46,35 +46,7 @@ import { EventDetailModal } from './components/events/EventDetailModal';
 import { ProfileDetailModal } from './components/people/ProfileDetailModal';
 import { EditProfileModal } from './components/profile/EditProfileModal';
 
-function PageLoadingFallback() {
-  return (
-    <div
-      role="status"
-      aria-live="polite"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '340px',
-        gap: '0.85rem',
-        color: 'var(--color-text-muted)'
-      }}
-    >
-      <div
-        style={{
-          width: '36px',
-          height: '36px',
-          borderRadius: 'var(--radius-full)',
-          border: '3px solid var(--border-subtle)',
-          borderTopColor: 'var(--color-primary)',
-          animation: 'spin 0.8s linear infinite'
-        }}
-      />
-      <span style={{ fontSize: '0.875rem' }}>Loading view...</span>
-    </div>
-  );
-}
+import { PageSkeleton } from './components/common/PageSkeleton';
 
 function MainContent() {
   const { currentView } = useApp();
@@ -119,7 +91,7 @@ function MainContent() {
         {/* Center Main Stage Content */}
         <main className="content-area" id="main-content">
           <ErrorBoundary>
-            <Suspense fallback={<PageLoadingFallback />}>
+            <Suspense fallback={<PageSkeleton />}>
               {renderView()}
             </Suspense>
           </ErrorBoundary>

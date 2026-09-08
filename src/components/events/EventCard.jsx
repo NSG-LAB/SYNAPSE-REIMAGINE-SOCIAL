@@ -3,39 +3,36 @@ import { useApp } from '../../context/AppContext';
 import { SafeImage } from '../common/SafeImage';
 import { Calendar, MapPin, Users, Check, Plus, Zap } from 'lucide-react';
 
+/**
+ * EventCard displays sprint/hackathon/meetup event details with RSVP toggle and modal trigger.
+ * Fully keyboard accessible with semantic buttons for cover modal trigger and RSVP.
+ *
+ * @param {Object} props
+ * @param {import('../../data/mockData').Event} props.event - Event data object
+ * @returns {React.ReactElement}
+ */
 export function EventCard({ event }) {
   const { joinedEventIds, toggleJoinEvent, openModal } = useApp();
   const isJoined = joinedEventIds.includes(event.id);
 
   return (
     <div
-      className="glass-panel event-card"
+      className="glass-panel card-interactive event-card"
       style={{
         borderRadius: 'var(--radius-lg)',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--color-bg-surface)',
-        border: '1px solid var(--border-subtle)',
-        transition: 'transform var(--transition-normal), box-shadow var(--transition-normal)'
+        border: '1px solid var(--border-subtle)'
       }}
     >
       {/* Cover Image with Type and Bounty Badges */}
       <button
         type="button"
+        className="card-cover-btn"
         aria-label={`View details for ${event.title}`}
-        style={{
-          height: '140px',
-          width: '100%',
-          position: 'relative',
-          background: 'var(--color-bg-elevated)',
-          overflow: 'hidden',
-          cursor: 'pointer',
-          border: 'none',
-          padding: 0,
-          display: 'block',
-          textAlign: 'left'
-        }}
+        style={{ height: '140px' }}
         onClick={() => openModal('eventDetail', event)}
       >
         <SafeImage

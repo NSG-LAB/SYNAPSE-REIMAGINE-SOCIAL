@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { SafeImage } from '../common/SafeImage';
+import { EmptyState } from '../common/EmptyState';
 import { PostCard } from '../feed/PostCard';
 import { CommunityCard } from '../communities/CommunityCard';
 import { EventCard } from '../events/EventCard';
@@ -20,6 +21,7 @@ export function ProfileView() {
   const { 
     userProfile, 
     openModal, 
+    setCurrentView,
     posts, 
     communities, 
     events, 
@@ -215,33 +217,49 @@ export function ProfileView() {
             {myPosts.length > 0 ? (
               myPosts.map(p => <PostCard key={p.id} post={p} />)
             ) : (
-              <p style={{ textAlign: 'center', padding: '3rem 0', color: 'var(--color-text-muted)' }}>
-                You haven’t posted any sparks yet. Click "New Spark" to share with the community!
-              </p>
+              <EmptyState
+                icon={Sparkles}
+                title="No Sparks Shared Yet"
+                description="Share your first spark, proof-of-work snippet, or ask a technical inquiry to earn XP."
+                actionLabel="Share First Spark"
+                onAction={() => openModal('createPost')}
+              />
             )}
           </div>
         )}
 
         {activeTab === 'guilds' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
+          <div>
             {myGuilds.length > 0 ? (
-              myGuilds.map(c => <CommunityCard key={c.id} community={c} />)
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
+                {myGuilds.map(c => <CommunityCard key={c.id} community={c} />)}
+              </div>
             ) : (
-              <p style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem 0', color: 'var(--color-text-muted)' }}>
-                You haven't joined any guilds yet. Explore guilds to connect with creators!
-              </p>
+              <EmptyState
+                icon={Compass}
+                title="No Guilds Joined"
+                description="Guilds are autonomous maker collectives. Join one to collaborate on projects and participate in sprints."
+                actionLabel="Explore Guilds"
+                onAction={() => setCurrentView('communities')}
+              />
             )}
           </div>
         )}
 
         {activeTab === 'challenges' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
+          <div>
             {myEvents.length > 0 ? (
-              myEvents.map(e => <EventCard key={e.id} event={e} />)
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
+                {myEvents.map(e => <EventCard key={e.id} event={e} />)}
+              </div>
             ) : (
-              <p style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem 0', color: 'var(--color-text-muted)' }}>
-                No active challenges joined. Head over to Challenges to find an upcoming jam!
-              </p>
+              <EmptyState
+                icon={Award}
+                title="No Active Sprints"
+                description="Participate in timed maker sprints and solve bounties to level up your maker rank."
+                actionLabel="Browse Active Sprints"
+                onAction={() => setCurrentView('events')}
+              />
             )}
           </div>
         )}
@@ -251,9 +269,13 @@ export function ProfileView() {
             {mySavedPosts.length > 0 ? (
               mySavedPosts.map(p => <PostCard key={p.id} post={p} />)
             ) : (
-              <p style={{ textAlign: 'center', padding: '3rem 0', color: 'var(--color-text-muted)' }}>
-                No saved sparks yet. Bookmark any post from the feed to review it later.
-              </p>
+              <EmptyState
+                icon={Bookmark}
+                title="No Saved Sparks"
+                description="You haven't bookmarked any sparks yet. Save insightful discussions or proof-of-work for quick reference."
+                actionLabel="Discover Sparks"
+                onAction={() => setCurrentView('discover')}
+              />
             )}
           </div>
         )}

@@ -174,9 +174,15 @@ export function CommunitiesPage() {
         <EmptyState
           icon={Compass}
           title="No Guilds Found"
-          description="We couldn't find any communities matching your criteria. Be a pioneer and launch your own guild!"
+          description="We couldn't find any communities matching your criteria. Be a pioneer and launch your own guild or clear filters!"
           actionLabel="Launch New Guild"
           onAction={() => openModal('createCommunity')}
+          secondaryActionLabel="Reset Filters"
+          onSecondaryAction={() => {
+            setSelectedCategory('All');
+            setFilterQuery('');
+            setActiveTab('all');
+          }}
         />
       )}
     </div>

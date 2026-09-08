@@ -135,6 +135,9 @@ export function AppProvider({ children }) {
   const [activeModal, setActiveModal] = useState(() => {
     const route = parseHash();
     if (route.modal) {
+      if (route.modal.type === 'createPost' || route.modal.type === 'createCommunity' || route.modal.type === 'editProfile') {
+        return { type: route.modal.type, data: null };
+      }
       if (route.modal.type === 'postDetail') {
         let storedPosts = initialPosts;
         try {
@@ -210,6 +213,10 @@ export function AppProvider({ children }) {
         setCurrentViewState(route.view);
       }
       if (route.modal) {
+        if (route.modal.type === 'createPost' || route.modal.type === 'createCommunity' || route.modal.type === 'editProfile') {
+          setActiveModal({ type: route.modal.type, data: null });
+          return;
+        }
         let modalData = null;
         if (route.modal.type === 'postDetail') {
           modalData = posts.find(p => p.id === route.modal.id);

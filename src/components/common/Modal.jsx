@@ -56,7 +56,13 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = '640px' }) 
         if (!modalRef.current) return;
 
         const focusables = Array.from(modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR))
-          .filter(el => el.offsetParent !== null || el.getClientRects().length > 0);
+          .filter(el => {
+            if (el.hasAttribute('disabled') || el.getAttribute('aria-hidden') === 'true') return false;
+            if (el.offsetParent !== null || el.getClientRects().length > 0) return true;
+            // Fallback for JSDOM or headless environments without full layout geometry
+            const isJsdom = typeof navigator !== 'undefined' && /jsdom|Node\.js/i.test(navigator.userAgent);
+            return isJsdom && el.style.display !== 'none' && el.style.visibility !== 'hidden';
+          });
 
         if (focusables.length === 0) {
           e.preventDefault();

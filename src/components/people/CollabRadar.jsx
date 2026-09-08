@@ -254,6 +254,15 @@ function CollabMatchCard({ match, onConnect, onMessage, onViewProfile, isFollowe
   );
 }
 
+/**
+ * CollabRadar computes mutual skill/interest compatibility and presents a ranked radar match list.
+ * Supports compact mode for sidebars and expanded mode for the People directory.
+ *
+ * @param {Object} props
+ * @param {boolean} [props.compact=false] - Whether to render in rail/sidebar mode
+ * @param {number} [props.maxResults=8] - Maximum number of matches to display
+ * @returns {React.ReactElement}
+ */
 export function CollabRadar({ compact = false, maxResults = 8 }) {
   const {
     userProfile,

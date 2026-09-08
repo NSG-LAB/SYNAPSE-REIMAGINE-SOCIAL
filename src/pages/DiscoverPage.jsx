@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { SafeImage } from '../components/common/SafeImage';
+import { OnboardingBanner } from '../components/common/OnboardingBanner';
 import { PostCard } from '../components/feed/PostCard';
 import { FilterBar } from '../components/feed/FilterBar';
 import { EmptyState } from '../components/common/EmptyState';
@@ -56,6 +57,9 @@ export function DiscoverPage() {
 
   return (
     <div>
+      {/* First-time visitor onboarding explanation */}
+      <OnboardingBanner />
+
       {/* Modern Hero Dashboard Welcome Area */}
       <section
         aria-label="Welcome and Intent"
@@ -289,6 +293,11 @@ export function DiscoverPage() {
             description={`No contributions match category "${selectedCategory}" with intent "${activeIntent}". Try clearing filters or create a new spark!`}
             actionLabel="Post New Spark"
             onAction={() => openModal('createPost')}
+            secondaryActionLabel="Reset All Filters"
+            onSecondaryAction={() => {
+              setSelectedCategory('All');
+              setActiveIntent('all');
+            }}
           />
         )}
       </main>

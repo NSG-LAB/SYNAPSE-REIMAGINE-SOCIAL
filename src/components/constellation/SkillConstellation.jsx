@@ -102,6 +102,7 @@ export function SkillConstellation() {
   const containerRef = useRef(null);
   const [hoveredUser, setHoveredUser] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [liveAnnouncement, setLiveAnnouncement] = useState('');
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
@@ -220,30 +221,54 @@ export function SkillConstellation() {
         </div>
         <div style={{ display: 'flex', gap: '0.35rem' }}>
           <button
+            type="button"
             onClick={() => setZoom(z => Math.min(z + 0.2, 2.5))}
             className="btn btn-sm btn-secondary"
             style={{ padding: '0.3rem', borderRadius: 'var(--radius-sm)' }}
             title="Zoom in"
+            aria-label="Zoom in constellation map"
           >
             <ZoomIn size={14} />
           </button>
           <button
+            type="button"
             onClick={() => setZoom(z => Math.max(z - 0.2, 0.5))}
             className="btn btn-sm btn-secondary"
             style={{ padding: '0.3rem', borderRadius: 'var(--radius-sm)' }}
             title="Zoom out"
+            aria-label="Zoom out constellation map"
           >
             <ZoomOut size={14} />
           </button>
           <button
+            type="button"
             onClick={resetView}
             className="btn btn-sm btn-secondary"
             style={{ padding: '0.3rem', borderRadius: 'var(--radius-sm)' }}
             title="Reset view"
+            aria-label="Reset zoom and center constellation map"
           >
             <Maximize2 size={14} />
           </button>
         </div>
+      </div>
+
+      {/* Screen reader live region */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        style={{
+          position: 'absolute',
+          width: '1px',
+          height: '1px',
+          padding: 0,
+          margin: '-1px',
+          overflow: 'hidden',
+          clip: 'rect(0,0,0,0)',
+          border: 0
+        }}
+      >
+        {liveAnnouncement}
       </div>
 
       {/* SVG Canvas */}
@@ -382,17 +407,24 @@ export function SkillConstellation() {
                   aria-label={accessibleLabel}
                   aria-pressed={isSelected}
                   style={{ outline: 'none', cursor: 'pointer' }}
-                  onFocus={() => setHoveredUser(user.id)}
+                  onFocus={() => {
+                    setHoveredUser(user.id);
+                    setLiveAnnouncement(accessibleLabel);
+                  }}
                   onBlur={() => setHoveredUser(null)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
-                      setSelectedUser(selectedUser === user.id ? null : user.id);
+                      const next = selectedUser === user.id ? null : user.id;
+                      setSelectedUser(next);
+                      setLiveAnnouncement(next ? `Inspecting ${user.name}. View profile button is available.` : 'Deselected maker.');
                     }
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedUser(selectedUser === user.id ? null : user.id);
+                    const next = selectedUser === user.id ? null : user.id;
+                    setSelectedUser(next);
+                    setLiveAnnouncement(next ? `Inspecting ${user.name}.` : 'Deselected maker.');
                   }}
                 >
                   {/* Pulse ring for matches */}
