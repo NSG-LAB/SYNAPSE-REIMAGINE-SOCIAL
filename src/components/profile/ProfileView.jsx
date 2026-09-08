@@ -39,45 +39,27 @@ export function ProfileView() {
   const mySavedPosts = posts.filter(p => savedPostIds.includes(p.id));
 
   return (
-    <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+    <div className="profile-container">
       {/* Banner & Avatar Container */}
-      <div
-        className="glass-panel"
-        style={{
-          borderRadius: 'var(--radius-lg)',
-          overflow: 'hidden',
-          marginBottom: '1.5rem',
-          background: 'var(--color-bg-surface)',
-          border: '1px solid var(--border-subtle)'
-        }}
-      >
+      <div className="glass-panel profile-card">
         {/* Cover Photo */}
         <div
+          className="profile-cover"
           style={{
-            height: '180px',
-            width: '100%',
-            background: userProfile.cover ? `url(${userProfile.cover}) center/cover` : 'var(--gradient-brand)',
-            position: 'relative'
+            background: userProfile.cover ? `url(${userProfile.cover}) center/cover` : 'var(--gradient-brand)'
           }}
         />
 
         {/* Profile Info Row */}
-        <div style={{ padding: '0 1.5rem 1.5rem 1.5rem', position: 'relative' }}>
+        <div className="profile-body">
           {/* Avatar and Edit Button */}
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginTop: '-42px', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <div className="profile-header-actions">
             <SafeImage
               src={userProfile.avatar}
               alt={userProfile.name}
               type="avatar"
               name={userProfile.name}
-              style={{
-                width: '92px',
-                height: '92px',
-                borderRadius: 'var(--radius-full)',
-                border: '4px solid var(--color-bg-surface)',
-                boxShadow: 'var(--shadow-md)',
-                objectFit: 'cover'
-              }}
+              className="profile-avatar-img"
             />
 
             <button
@@ -90,21 +72,21 @@ export function ProfileView() {
           </div>
 
           {/* User Names & Role */}
-          <h2 style={{ fontSize: '1.45rem', fontWeight: 800, marginBottom: '2px' }}>{userProfile.name}</h2>
-          <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginBottom: '0.4rem' }}>
+          <h2 className="profile-title">{userProfile.name}</h2>
+          <div className="profile-handle">
             @{userProfile.handle}
           </div>
-          <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--color-primary)', marginBottom: '0.75rem' }}>
+          <div className="profile-role">
             {userProfile.role}
           </div>
 
           {/* Bio */}
-          <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, color: 'var(--color-text-secondary)', maxWidth: '720px', marginBottom: '1rem' }}>
+          <p className="profile-bio">
             {userProfile.bio}
           </p>
 
           {/* Metadata Badges */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '1.25rem' }}>
+          <div className="profile-meta-row">
             {userProfile.location && (
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <MapPin size={14} /> {userProfile.location}
@@ -128,33 +110,25 @@ export function ProfileView() {
           </div>
 
           {/* Karma & Impact Metrics Strip */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 120px), 1fr))',
-              gap: '0.75rem',
-              paddingTop: '1.25rem',
-              borderTop: '1px solid var(--border-subtle)'
-            }}
-          >
-            <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Community Karma</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-primary)' }}>{userProfile.stats.karma}</div>
+          <div className="profile-stats-grid">
+            <div className="profile-stat-box">
+              <div className="profile-stat-label">Community Karma</div>
+              <div className="profile-stat-value" style={{ color: 'var(--color-primary)' }}>{userProfile.stats.karma}</div>
             </div>
 
-            <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Published Sparks</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent-amber)' }}>{myPosts.length}</div>
+            <div className="profile-stat-box">
+              <div className="profile-stat-label">Published Sparks</div>
+              <div className="profile-stat-value" style={{ color: 'var(--color-accent-amber)' }}>{myPosts.length}</div>
             </div>
 
-            <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Challenges Sprinted</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent-emerald)' }}>{myEvents.length}</div>
+            <div className="profile-stat-box">
+              <div className="profile-stat-label">Challenges Sprinted</div>
+              <div className="profile-stat-value" style={{ color: 'var(--color-accent-emerald)' }}>{myEvents.length}</div>
             </div>
 
-            <div style={{ background: 'var(--color-bg-elevated)', padding: '0.75rem', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.72rem', color: 'var(--color-text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Guild Memberships</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--color-accent-cyan)' }}>{myGuilds.length}</div>
+            <div className="profile-stat-box">
+              <div className="profile-stat-label">Guild Memberships</div>
+              <div className="profile-stat-value" style={{ color: 'var(--color-accent-cyan)' }}>{myGuilds.length}</div>
             </div>
           </div>
         </div>
@@ -164,19 +138,7 @@ export function ProfileView() {
       <StreakXPWidget />
 
       {/* Tabs */}
-      <div
-        style={{
-          display: 'flex',
-          gap: '0.5rem',
-          borderBottom: '1px solid var(--border-subtle)',
-          paddingBottom: '0.5rem',
-          marginBottom: '1.5rem',
-          overflowX: 'auto',
-          scrollbarWidth: 'none',
-          WebkitOverflowScrolling: 'touch',
-          maxWidth: '100%'
-        }}
-      >
+      <div className="profile-tabs-scroll">
         <button
           onClick={() => setActiveTab('sparks')}
           className={`btn btn-sm ${activeTab === 'sparks' ? 'btn-primary' : 'btn-ghost'}`}

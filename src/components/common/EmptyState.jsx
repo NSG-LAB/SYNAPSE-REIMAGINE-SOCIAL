@@ -42,35 +42,14 @@ export function EmptyState({
         background: 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.07) 0%, var(--color-bg-surface) 70%)'
       }}
     >
-      {/* Signature glowing cosmic icon container */}
-      <div style={{ position: 'relative' }}>
-        <div
-          style={{
-            position: 'absolute',
-            inset: -8,
-            borderRadius: 'var(--radius-full)',
-            background: 'var(--color-primary)',
-            opacity: 0.15,
-            filter: 'blur(12px)',
-            animation: 'pulseGlow 3s infinite ease-in-out'
-          }}
-        />
-        <div
-          style={{
-            width: '68px',
-            height: '68px',
-            borderRadius: 'var(--radius-full)',
-            background: 'var(--color-bg-elevated)',
-            border: '2px solid var(--border-medium)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--color-primary)',
-            position: 'relative',
-            boxShadow: 'var(--shadow-sm)'
-          }}
-        >
-          <Icon size={32} />
+      {/* Signature glowing cosmic artwork with orbiting particle and floating icon */}
+      <div className="cosmic-art-container">
+        <div className="cosmic-orbit-ring">
+          <div className="cosmic-floating-dot" />
+        </div>
+        <div className="cosmic-core-glow" />
+        <div className="cosmic-center-icon" style={{ color: 'var(--color-primary)' }}>
+          <Icon size={28} />
         </div>
       </div>
 

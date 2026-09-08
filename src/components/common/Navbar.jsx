@@ -52,80 +52,23 @@ export function Navbar() {
   };
 
   return (
-    <header
-      className="glass-panel"
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 900,
-        height: 'var(--nav-height)',
-        width: '100%',
-        boxSizing: 'border-box',
-        display: 'flex',
-        alignItems: 'center',
-        borderBottom: '1px solid var(--color-glass-border)',
-        padding: '0 0.85rem'
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 'var(--max-content-width)',
-          margin: '0 auto',
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '0.75rem'
-        }}
-      >
+    <header className="glass-panel navbar-header">
+      <div className="navbar-inner">
         {/* Left: Brand / Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexShrink: 0 }}>
           <button
             onClick={() => handleNavClick('discover')}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            className="navbar-brand-btn"
             aria-label="SYNAPSE Home"
           >
-            <div
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: 'var(--radius-md)',
-                background: 'var(--gradient-brand)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: 'var(--shadow-glow)',
-                flexShrink: 0
-              }}
-            >
+            <div className="navbar-brand-icon">
               <Radio size={18} color="#ffffff" />
             </div>
-            <div style={{ textAlign: 'left' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 800,
-                  fontSize: '1.2rem',
-                  letterSpacing: '-0.03em',
-                  background: 'var(--gradient-brand)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  display: 'block',
-                  lineHeight: 1
-                }}
-              >
+            <div>
+              <span className="navbar-brand-title">
                 SYNAPSE
               </span>
-              <span
-                className="hide-on-mobile-subtitle"
-                style={{
-                  fontSize: '0.62rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  color: 'var(--color-text-muted)',
-                  textTransform: 'uppercase'
-                }}
-              >
+              <span className="hide-on-mobile-subtitle navbar-brand-sub">
                 Reimagine Social
               </span>
             </div>
