@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { UserPlus, UserCheck, MessageSquare, MapPin } from 'lucide-react';
 
 export function PersonCard({ user }) {
@@ -33,19 +34,34 @@ export function PersonCard({ user }) {
             style={{ padding: 0 }}
             aria-label={`View ${user.name}'s profile`}
           >
-            <img
+            <SafeImage
               src={user.avatar}
               alt={user.name}
+              type="avatar"
+              name={user.name}
               loading="lazy"
               style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
             />
           </button>
           <div>
             <h4
-              style={{ fontSize: '1rem', fontWeight: 700, cursor: 'pointer', lineHeight: 1.25 }}
-              onClick={() => openModal('profileDetail', user)}
+              style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.25 }}
             >
-              {user.name}
+              <button
+                type="button"
+                onClick={() => openModal('profileDetail', user)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  font: 'inherit',
+                  color: 'inherit',
+                  cursor: 'pointer',
+                  textAlign: 'left'
+                }}
+              >
+                {user.name}
+              </button>
             </h4>
             <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
               @{user.handle}

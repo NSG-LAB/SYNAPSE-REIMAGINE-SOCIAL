@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
+import { SafeImage } from '../common/SafeImage';
 import { PostCard } from '../feed/PostCard';
 import { Check, Plus, Award, ShieldAlert, Sparkles, PlusCircle } from 'lucide-react';
 
@@ -39,9 +40,12 @@ export function CommunityDetailModal() {
             background: 'var(--color-bg-elevated)'
           }}
         >
-          <img
+          <SafeImage
             src={community.coverImage}
             alt={community.name}
+            type="cover"
+            title={community.name}
+            category={community.category}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div

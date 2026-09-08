@@ -1,22 +1,101 @@
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'area[href]',
+  'input:not([disabled]):not([type="hidden"])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  'button:not([disabled])',
+  'iframe',
+  'object',
+  'embed',
+  '[tabindex]:not([tabindex="-1"])',
+  '[contenteditable]'
+].join(', ');
+
 export function Modal({ isOpen, onClose, title, children, maxWidth = '640px' }) {
   const modalRef = useRef(null);
+  const closeBtnRef = useRef(null);
+  const triggerElementRef = useRef(null);
 
+  // Focus trap and focus restoration
   useEffect(() => {
+    if (!isOpen) return;
+
+    // 1. Capture the element that triggered the modal
+    triggerElementRef.current = document.activeElement;
+
+    // Prevent body scrolling while modal is open
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    // 2. Move focus into the modal once rendered
+    const focusTimer = requestAnimationFrame(() => {
+      if (!modalRef.current) return;
+      const focusable = modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR);
+      if (focusable.length > 0) {
+        // If there's an autofocus element or an input, prefer it, otherwise focus the close button or first focusable
+        const preferred = modalRef.current.querySelector('[autofocus]') || focusable[0];
+        preferred.focus();
+      } else {
+        modalRef.current.focus();
+      }
+    });
+
+    // 3. Intercept Escape (to close) and Tab (to trap focus inside dialog)
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
         onClose();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        if (!modalRef.current) return;
+
+        const focusables = Array.from(modalRef.current.querySelectorAll(FOCUSABLE_SELECTOR))
+          .filter(el => el.offsetParent !== null || el.getClientRects().length > 0);
+
+        if (focusables.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        const firstElement = focusables[0];
+        const lastElement = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          // Shift + Tab: if on first element, wrap to last
+          if (document.activeElement === firstElement || !modalRef.current.contains(document.activeElement)) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab: if on last element, wrap to first
+          if (document.activeElement === lastElement || !modalRef.current.contains(document.activeElement)) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
     return () => {
-      document.body.style.overflow = '';
+      cancelAnimationFrame(focusTimer);
+      document.body.style.overflow = originalOverflow;
       window.removeEventListener('keydown', handleKeyDown);
+
+      // 4. Restore focus to the trigger element on close
+      if (triggerElementRef.current && typeof triggerElementRef.current.focus === 'function') {
+        // Small delay to ensure the DOM has updated
+        setTimeout(() => {
+          triggerElementRef.current?.focus();
+        }, 10);
+      }
     };
   }, [isOpen, onClose]);
 
@@ -47,6 +126,7 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = '640px' }) 
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-headline"
+        tabIndex={-1}
         className="modal-content glass-panel"
         style={{
           width: '100%',
@@ -59,7 +139,8 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = '640px' }) 
           backgroundColor: 'var(--color-bg-surface)',
           border: '1px solid var(--border-medium)',
           boxShadow: 'var(--shadow-lg)',
-          animation: 'modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
+          animation: 'modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          outline: 'none'
         }}
       >
         <div
@@ -76,6 +157,7 @@ export function Modal({ isOpen, onClose, title, children, maxWidth = '640px' }) 
             {title}
           </h2>
           <button
+            ref={closeBtnRef}
             onClick={onClose}
             aria-label="Close dialog"
             className="btn-icon"

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
+import { SafeImage } from '../common/SafeImage';
 import { Heart, Bookmark, Share2, Send } from 'lucide-react';
 
 export function PostDetailModal() {
@@ -45,9 +46,11 @@ export function PostDetailModal() {
       <div>
         {/* Author Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
-          <img
+          <SafeImage
             src={post.author.avatar}
             alt={post.author.name}
+            type="avatar"
+            name={post.author.name}
             style={{ width: '46px', height: '46px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
           />
           <div>
@@ -66,7 +69,13 @@ export function PostDetailModal() {
         {/* Large Media Image if exists */}
         {post.image && (
           <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', marginBottom: '1.25rem', maxHeight: '450px' }}>
-            <img src={post.image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <SafeImage
+              src={post.image}
+              alt={post.title}
+              type="post"
+              title={post.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
           </div>
         )}
 
@@ -191,9 +200,11 @@ export function PostDetailModal() {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.4rem' }}>
-                    <img
+                    <SafeImage
                       src={c.author.avatar}
                       alt={c.author.name}
+                      type="avatar"
+                      name={c.author.name}
                       style={{ width: '32px', height: '32px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
                     />
                     <div style={{ flex: 1 }}>

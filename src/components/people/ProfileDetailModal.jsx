@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
+import { SafeImage } from '../common/SafeImage';
 import { mockUsers } from '../../data/users';
 import { UserCheck, UserPlus, MessageSquare, MapPin } from 'lucide-react';
 
@@ -35,9 +36,11 @@ export function ProfileDetailModal() {
               background: user.cover ? `url(${user.cover}) center/cover` : 'var(--gradient-brand)'
             }}
           />
-          <img
+          <SafeImage
             src={user.avatar}
             alt={user.name}
+            type="avatar"
+            name={user.name}
             style={{
               width: '84px',
               height: '84px',

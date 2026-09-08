@@ -7,6 +7,7 @@ import { mockPosts as initialPosts } from '../data/posts';
 import { mockEvents as initialEvents } from '../data/events';
 import { initialConversations } from '../data/messages';
 import { initialNotifications } from '../data/notifications';
+import { parseHash, pushRoute } from '../utils/router';
 
 const AppContext = createContext(null);
 
@@ -24,8 +25,23 @@ export function AppProvider({ children }) {
   // Theme State: 'dark' | 'light' | 'midnight'
   const [theme, setTheme] = useLocalStorage('synapse_theme', 'dark');
 
-  // Navigation View State
-  const [currentView, setCurrentView] = useState('discover'); // 'discover' | 'communities' | 'explore' | 'events' | 'people' | 'messages' | 'notifications' | 'profile' | 'settings'
+  // Navigation View State (initialized from URL hash or localStorage)
+  const [currentView, setCurrentViewState] = useState(() => {
+    const fromHash = parseHash().view;
+    if (fromHash) return fromHash;
+    try {
+      const saved = window.localStorage.getItem('synapse_current_view');
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return 'discover';
+  });
+
+  const setCurrentView = useCallback((view) => {
+    setCurrentViewState(view);
+    try {
+      window.localStorage.setItem('synapse_current_view', JSON.stringify(view));
+    } catch {}
+  }, []);
 
   // Global Search & Filter
   const [searchQuery, setSearchQuery] = useState('');
@@ -116,7 +132,40 @@ export function AppProvider({ children }) {
   }, [setConversations]);
 
   // Active Modal State: { type: string | null, data: any }
-  const [activeModal, setActiveModal] = useState({ type: null, data: null });
+  const [activeModal, setActiveModal] = useState(() => {
+    const route = parseHash();
+    if (route.modal) {
+      if (route.modal.type === 'postDetail') {
+        let storedPosts = initialPosts;
+        try {
+          const raw = window.localStorage.getItem('synapse_posts');
+          if (raw) storedPosts = JSON.parse(raw);
+        } catch {}
+        const found = storedPosts.find(p => p.id === route.modal.id);
+        if (found) return { type: route.modal.type, data: found };
+      } else if (route.modal.type === 'communityDetail') {
+        let storedCommunities = initialCommunities;
+        try {
+          const raw = window.localStorage.getItem('synapse_communities');
+          if (raw) storedCommunities = JSON.parse(raw);
+        } catch {}
+        const found = storedCommunities.find(c => c.id === route.modal.id || c.slug === route.modal.id);
+        if (found) return { type: route.modal.type, data: found };
+      } else if (route.modal.type === 'eventDetail') {
+        let storedEvents = initialEvents;
+        try {
+          const raw = window.localStorage.getItem('synapse_events');
+          if (raw) storedEvents = JSON.parse(raw);
+        } catch {}
+        const found = storedEvents.find(e => e.id === route.modal.id);
+        if (found) return { type: route.modal.type, data: found };
+      } else if (route.modal.type === 'profileDetail') {
+        const found = mockUsers.find(u => u.id === route.modal.id || u.handle === route.modal.id);
+        if (found) return { type: route.modal.type, data: found };
+      }
+    }
+    return { type: null, data: null };
+  });
 
   // Toast System
   const [toasts, setToasts] = useState([]);
@@ -147,6 +196,45 @@ export function AppProvider({ children }) {
   const closeModal = useCallback(() => {
     setActiveModal({ type: null, data: null });
   }, []);
+
+  // Synchronize URL hash with currentView and activeModal (deep links)
+  useEffect(() => {
+    pushRoute(currentView, activeModal);
+  }, [currentView, activeModal]);
+
+  // Handle browser back / forward navigation via hashchange & popstate
+  useEffect(() => {
+    const handleNavigation = () => {
+      const route = parseHash();
+      if (route.view && route.view !== currentView) {
+        setCurrentViewState(route.view);
+      }
+      if (route.modal) {
+        let modalData = null;
+        if (route.modal.type === 'postDetail') {
+          modalData = posts.find(p => p.id === route.modal.id);
+        } else if (route.modal.type === 'communityDetail') {
+          modalData = communities.find(c => c.id === route.modal.id || c.slug === route.modal.id);
+        } else if (route.modal.type === 'eventDetail') {
+          modalData = events.find(e => e.id === route.modal.id);
+        } else if (route.modal.type === 'profileDetail') {
+          modalData = mockUsers.find(u => u.id === route.modal.id || u.handle === route.modal.id);
+        }
+        if (modalData) {
+          setActiveModal({ type: route.modal.type, data: modalData });
+        }
+      } else if (activeModal.type) {
+        setActiveModal({ type: null, data: null });
+      }
+    };
+
+    window.addEventListener('hashchange', handleNavigation);
+    window.addEventListener('popstate', handleNavigation);
+    return () => {
+      window.removeEventListener('hashchange', handleNavigation);
+      window.removeEventListener('popstate', handleNavigation);
+    };
+  }, [currentView, activeModal.type, posts, communities, events]);
 
   // Community Interactions
   const toggleJoinCommunity = useCallback((communityId) => {

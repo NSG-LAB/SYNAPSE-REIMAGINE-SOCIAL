@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { SafeImage } from '../components/common/SafeImage';
 import { PostCard } from '../components/feed/PostCard';
 import { FilterBar } from '../components/feed/FilterBar';
 import { EmptyState } from '../components/common/EmptyState';
@@ -234,9 +235,11 @@ export function DiscoverPage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flex: 1, minWidth: 0 }}>
-          <img
+          <SafeImage
             src={userProfile.avatar}
             alt={userProfile.name}
+            type="avatar"
+            name={userProfile.name}
             style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
           />
           <button

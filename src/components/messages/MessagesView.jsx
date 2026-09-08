@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { Send, Search, ArrowLeft, Sparkles } from 'lucide-react';
 
 export function MessagesView() {
@@ -132,9 +133,11 @@ export function MessagesView() {
               >
                 {/* Avatar with Online Pip */}
                 <div style={{ position: 'relative', flexShrink: 0 }}>
-                  <img
+                  <SafeImage
                     src={conv.contact.avatar}
                     alt={conv.contact.name}
+                    type="avatar"
+                    name={conv.contact.name}
                     style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
                   />
                   {conv.contact.online && (
@@ -214,9 +217,11 @@ export function MessagesView() {
                 onClick={() => openModal('profileDetail', activeConv.contact)}
                 style={{ display: 'flex', alignItems: 'center', gap: '0.55rem', minWidth: 0, textAlign: 'left', flex: 1 }}
               >
-                <img
+                <SafeImage
                   src={activeConv.contact.avatar}
                   alt={activeConv.contact.name}
+                  type="avatar"
+                  name={activeConv.contact.name}
                   style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
                 />
                 <div style={{ minWidth: 0, flex: 1 }}>

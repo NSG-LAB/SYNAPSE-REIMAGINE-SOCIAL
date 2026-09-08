@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from './SafeImage';
 import { 
   Search, 
   Plus, 
@@ -308,9 +309,11 @@ export function Navbar() {
               aria-expanded={profileDropdownOpen}
               aria-label="User profile menu"
             >
-              <img
+              <SafeImage
                 src={userProfile.avatar}
                 alt={userProfile.name}
+                type="avatar"
+                name={userProfile.name}
                 style={{ width: '30px', height: '30px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
               />
             </button>

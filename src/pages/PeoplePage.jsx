@@ -117,6 +117,7 @@ export function PeoplePage() {
               className={`btn btn-sm ${viewMode === 'list' ? 'btn-primary' : 'btn-ghost'}`}
               style={{ borderRadius: 0, padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
               title="Grid View"
+              aria-label="Grid directory view (screen-reader accessible)"
             >
               <LayoutGrid size={14} />
             </button>
@@ -125,6 +126,7 @@ export function PeoplePage() {
               className={`btn btn-sm ${viewMode === 'constellation' ? 'btn-primary' : 'btn-ghost'}`}
               style={{ borderRadius: 0, padding: '0.35rem 0.6rem', fontSize: '0.75rem' }}
               title="Constellation View"
+              aria-label="Constellation interactive graph view"
             >
               <Orbit size={14} />
             </button>
@@ -159,7 +161,7 @@ export function PeoplePage() {
             <Orbit size={15} /> Skill Constellation Map
           </div>
           <p style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', marginBottom: '1rem', marginTop: 0 }}>
-            Each maker is a star positioned by their skills. Green lines show your skill matches. Click any node to explore.
+            Visual graph of makers positioned by skill synergy. Green lines highlight your skill matches. Navigate via mouse or Tab + Enter to inspect nodes. Switch to Grid View anytime for accessible text cards.
           </p>
           <SkillConstellation />
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { Calendar, MapPin, Users, Check, Plus, Zap } from 'lucide-react';
 
 export function EventCard({ event }) {
@@ -20,20 +21,29 @@ export function EventCard({ event }) {
       }}
     >
       {/* Cover Image with Type and Bounty Badges */}
-      <div
+      <button
+        type="button"
+        aria-label={`View details for ${event.title}`}
         style={{
           height: '140px',
           width: '100%',
           position: 'relative',
           background: 'var(--color-bg-elevated)',
           overflow: 'hidden',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          border: 'none',
+          padding: 0,
+          display: 'block',
+          textAlign: 'left'
         }}
         onClick={() => openModal('eventDetail', event)}
       >
-        <img
+        <SafeImage
           src={event.coverImage}
           alt={event.title}
+          type="cover"
+          title={event.title}
+          category={event.category}
           loading="lazy"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -93,7 +103,7 @@ export function EventCard({ event }) {
           <Calendar size={14} />
           <span>{event.date}</span>
         </div>
-      </div>
+      </button>
 
       {/* Content */}
       <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -103,12 +113,26 @@ export function EventCard({ event }) {
             fontSize: '1.1rem',
             fontWeight: 700,
             marginBottom: '0.5rem',
-            cursor: 'pointer',
             lineHeight: 1.3
           }}
-          onClick={() => openModal('eventDetail', event)}
         >
-          {event.title}
+          <button
+            type="button"
+            onClick={() => openModal('eventDetail', event)}
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              font: 'inherit',
+              color: 'inherit',
+              cursor: 'pointer',
+              textAlign: 'left',
+              width: '100%',
+              display: 'block'
+            }}
+          >
+            {event.title}
+          </button>
         </h3>
 
         {/* Meta Line: Location & Difficulty */}
@@ -129,9 +153,11 @@ export function EventCard({ event }) {
 
         {/* Organizer info */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', padding: '0.5rem', borderRadius: 'var(--radius-sm)', background: 'var(--color-bg-elevated)' }}>
-          <img
+          <SafeImage
             src={event.organizer.avatar}
             alt={event.organizer.name}
+            type="avatar"
+            name={event.organizer.name}
             style={{ width: '28px', height: '28px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
           />
           <div style={{ fontSize: '0.8rem' }}>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { 
   CheckCheck, 
   Flame, 
@@ -109,6 +110,14 @@ export function NotificationsView() {
           filtered.map((notif) => (
             <div
               key={notif.id}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleNotificationClick(notif);
+                }
+              }}
               onClick={() => handleNotificationClick(notif)}
               className="glass-panel"
               style={{
@@ -126,9 +135,11 @@ export function NotificationsView() {
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
                 <div style={{ position: 'relative' }}>
-                  <img
+                  <SafeImage
                     src={notif.user.avatar}
                     alt={notif.user.name}
+                    type="avatar"
+                    name={notif.user.name}
                     style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
                   />
                   <div

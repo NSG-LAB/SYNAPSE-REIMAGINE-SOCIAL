@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { 
   Heart, 
   MessageSquare, 
@@ -40,8 +41,9 @@ export function PostCard({ post }) {
   };
 
   const handleShare = () => {
+    const shareUrl = `${window.location.origin}${window.location.pathname}#/post/${post.id}`;
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(`${window.location.origin}#${post.id}`);
+      navigator.clipboard.writeText(shareUrl);
       addToast('Discussion link copied to clipboard! 🔗', 'success');
     } else {
       addToast('Shared post link!', 'info');
@@ -85,9 +87,11 @@ export function PostCard({ post }) {
             style={{ padding: 0 }}
             aria-label={`View ${post.author.name}'s profile`}
           >
-            <img
+            <SafeImage
               src={post.author.avatar}
               alt={post.author.name}
+              type="avatar"
+              name={post.author.name}
               style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
             />
           </button>
@@ -127,12 +131,26 @@ export function PostCard({ post }) {
           fontSize: '1.15rem',
           fontWeight: 700,
           marginBottom: '0.5rem',
-          cursor: 'pointer',
           lineHeight: 1.35
         }}
-        onClick={() => openModal('postDetail', post)}
       >
-        {post.title}
+        <button
+          type="button"
+          onClick={() => openModal('postDetail', post)}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            font: 'inherit',
+            color: 'inherit',
+            textAlign: 'left',
+            cursor: 'pointer',
+            width: '100%',
+            display: 'block'
+          }}
+        >
+          {post.title}
+        </button>
       </h3>
 
       {/* Content */}
@@ -158,9 +176,11 @@ export function PostCard({ post }) {
             background: 'var(--color-bg-base)'
           }}
         >
-          <img
+          <SafeImage
             src={post.image}
             alt={post.title}
+            type="post"
+            title={post.title}
             loading="lazy"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
@@ -364,9 +384,11 @@ export function PostCard({ post }) {
                     borderRadius: 'var(--radius-md)'
                   }}
                 >
-                  <img
+                  <SafeImage
                     src={comm.author.avatar}
                     alt={comm.author.name}
+                    type="avatar"
+                    name={comm.author.name}
                     style={{ width: '32px', height: '32px', borderRadius: 'var(--radius-full)', objectFit: 'cover', flexShrink: 0 }}
                   />
                   <div style={{ flex: 1 }}>

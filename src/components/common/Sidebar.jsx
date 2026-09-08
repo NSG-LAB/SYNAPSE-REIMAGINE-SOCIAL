@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from './SafeImage';
 import { 
   Sparkles, 
   Compass, 
@@ -53,9 +54,11 @@ export function Sidebar() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.85rem' }}>
-          <img
+          <SafeImage
             src={userProfile.avatar}
             alt={userProfile.name}
+            type="avatar"
+            name={userProfile.name}
             style={{ width: '46px', height: '46px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
           />
           <div style={{ minWidth: 0, flex: 1 }}>

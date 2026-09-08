@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { AppProvider, useApp } from './context/AppContext';
 import { Navbar } from './components/common/Navbar';
 import { Sidebar } from './components/common/Sidebar';
@@ -8,16 +8,34 @@ import { Footer } from './components/common/Footer';
 import { ToastContainer } from './components/common/ToastContainer';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 
-// Pages
-import { DiscoverPage } from './pages/DiscoverPage';
-import { CommunitiesPage } from './pages/CommunitiesPage';
-import { EventsPage } from './pages/EventsPage';
-import { PeoplePage } from './pages/PeoplePage';
-import { ExplorePage } from './pages/ExplorePage';
-import { MessagesView } from './components/messages/MessagesView';
-import { NotificationsView } from './components/notifications/NotificationsView';
-import { ProfileView } from './components/profile/ProfileView';
-import { SettingsView } from './components/settings/SettingsView';
+// Code-split route-level pages and views via React.lazy
+const DiscoverPage = React.lazy(() =>
+  import('./pages/DiscoverPage').then(m => ({ default: m.DiscoverPage }))
+);
+const CommunitiesPage = React.lazy(() =>
+  import('./pages/CommunitiesPage').then(m => ({ default: m.CommunitiesPage }))
+);
+const EventsPage = React.lazy(() =>
+  import('./pages/EventsPage').then(m => ({ default: m.EventsPage }))
+);
+const PeoplePage = React.lazy(() =>
+  import('./pages/PeoplePage').then(m => ({ default: m.PeoplePage }))
+);
+const ExplorePage = React.lazy(() =>
+  import('./pages/ExplorePage').then(m => ({ default: m.ExplorePage }))
+);
+const MessagesView = React.lazy(() =>
+  import('./components/messages/MessagesView').then(m => ({ default: m.MessagesView }))
+);
+const NotificationsView = React.lazy(() =>
+  import('./components/notifications/NotificationsView').then(m => ({ default: m.NotificationsView }))
+);
+const ProfileView = React.lazy(() =>
+  import('./components/profile/ProfileView').then(m => ({ default: m.ProfileView }))
+);
+const SettingsView = React.lazy(() =>
+  import('./components/settings/SettingsView').then(m => ({ default: m.SettingsView }))
+);
 
 // Modals
 import { CreatePostModal } from './components/feed/CreatePostModal';
@@ -27,6 +45,36 @@ import { CommunityDetailModal } from './components/communities/CommunityDetailMo
 import { EventDetailModal } from './components/events/EventDetailModal';
 import { ProfileDetailModal } from './components/people/ProfileDetailModal';
 import { EditProfileModal } from './components/profile/EditProfileModal';
+
+function PageLoadingFallback() {
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '340px',
+        gap: '0.85rem',
+        color: 'var(--color-text-muted)'
+      }}
+    >
+      <div
+        style={{
+          width: '36px',
+          height: '36px',
+          borderRadius: 'var(--radius-full)',
+          border: '3px solid var(--border-subtle)',
+          borderTopColor: 'var(--color-primary)',
+          animation: 'spin 0.8s linear infinite'
+        }}
+      />
+      <span style={{ fontSize: '0.875rem' }}>Loading view...</span>
+    </div>
+  );
+}
 
 function MainContent() {
   const { currentView } = useApp();
@@ -71,7 +119,9 @@ function MainContent() {
         {/* Center Main Stage Content */}
         <main className="content-area" id="main-content">
           <ErrorBoundary>
-            {renderView()}
+            <Suspense fallback={<PageLoadingFallback />}>
+              {renderView()}
+            </Suspense>
           </ErrorBoundary>
         </main>
 

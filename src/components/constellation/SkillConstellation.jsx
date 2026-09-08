@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { useApp } from '../../context/AppContext';
 import { mockUsers } from '../../data/users';
+import { SafeImage } from '../common/SafeImage';
+import { getAvatarFallback } from '../../utils/imageFallback';
 import { MessageSquare, UserPlus, X, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 
 // Simple seeded random for deterministic layouts
@@ -246,6 +248,8 @@ export function SkillConstellation() {
 
       {/* SVG Canvas */}
       <div
+        role="region"
+        aria-label="Skill Constellation interactive maker network"
         style={{
           borderRadius: 'var(--radius-lg)',
           overflow: 'hidden',
@@ -265,11 +269,15 @@ export function SkillConstellation() {
       >
         <svg
           ref={svgRef}
+          role="img"
+          aria-labelledby="constellation-title constellation-desc"
           width={dimensions.width}
           height={dimensions.height}
           viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
           style={{ display: 'block', width: '100%', height: 'auto' }}
         >
+          <title id="constellation-title">Skill Constellation Maker Network</title>
+          <desc id="constellation-desc">Interactive force-directed graph of makers positioned by complementary skills. Use Tab to navigate maker star nodes, and press Enter or Space to inspect maker synergy details.</desc>
           <defs>
             {/* Glow filter */}
             <filter id="node-glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -362,9 +370,31 @@ export function SkillConstellation() {
               const isMatch = currentUserMatches.some(m => m.user.id === user.id);
               const isFollowed = followedUserIds.includes(user.id);
               const r = isHovered || isSelected ? nodeRadius + 4 : nodeRadius;
+              const matchInfo = currentUserMatches.find(m => m.user.id === user.id);
+              const matchCount = matchInfo ? matchInfo.matches.total : 0;
+              const accessibleLabel = `${user.name}, ${user.role}. ${matchCount > 0 ? `${matchCount} skill match with you.` : ''} ${isFollowed ? 'Connected.' : ''} Press Enter or Space to inspect maker.`;
 
               return (
-                <g key={user.id}>
+                <g
+                  key={user.id}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={accessibleLabel}
+                  aria-pressed={isSelected}
+                  style={{ outline: 'none', cursor: 'pointer' }}
+                  onFocus={() => setHoveredUser(user.id)}
+                  onBlur={() => setHoveredUser(null)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedUser(selectedUser === user.id ? null : user.id);
+                    }
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedUser(selectedUser === user.id ? null : user.id);
+                  }}
+                >
                   {/* Pulse ring for matches */}
                   {isMatch && (
                     <circle
@@ -390,6 +420,19 @@ export function SkillConstellation() {
                     </circle>
                   )}
 
+                  {/* Accessible keyboard focus ring */}
+                  {(isHovered || isSelected) && (
+                    <circle
+                      cx={pos.x}
+                      cy={pos.y}
+                      r={r + 6}
+                      fill="none"
+                      stroke="#818cf8"
+                      strokeWidth="2.5"
+                      strokeDasharray="4 2"
+                    />
+                  )}
+
                   {/* Node border ring */}
                   <circle
                     cx={pos.x}
@@ -400,42 +443,25 @@ export function SkillConstellation() {
                     style={{ transition: 'r 0.2s ease' }}
                   />
 
-                  {/* Avatar image */}
+                  {/* Avatar background */}
                   <circle
                     cx={pos.x}
                     cy={pos.y}
                     r={r}
                     fill="var(--color-bg-elevated)"
-                    style={{ cursor: 'pointer', transition: 'r 0.2s ease' }}
-                    onMouseEnter={() => setHoveredUser(user.id)}
-                    onMouseLeave={() => setHoveredUser(null)}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedUser(selectedUser === user.id ? null : user.id);
-                    }}
+                    style={{ transition: 'r 0.2s ease' }}
                   />
                   <image
-                    href={user.avatar}
+                    href={user.avatar || getAvatarFallback(user.name)}
                     x={pos.x - r}
                     y={pos.y - r}
                     width={r * 2}
                     height={r * 2}
                     clipPath={`circle(${r - 1}px at ${r}px ${r}px)`}
-                    style={{ cursor: 'pointer', borderRadius: '50%', pointerEvents: 'none' }}
+                    style={{ borderRadius: '50%', pointerEvents: 'none' }}
                     preserveAspectRatio="xMidYMid slice"
-                  />
-                  {/* Circular clip overlay */}
-                  <circle
-                    cx={pos.x}
-                    cy={pos.y}
-                    r={r}
-                    fill="transparent"
-                    style={{ cursor: 'pointer' }}
-                    onMouseEnter={() => setHoveredUser(user.id)}
-                    onMouseLeave={() => setHoveredUser(null)}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedUser(selectedUser === user.id ? null : user.id);
+                    onError={(e) => {
+                      e.currentTarget.setAttribute('href', getAvatarFallback(user.name));
                     }}
                   />
 
@@ -457,7 +483,12 @@ export function SkillConstellation() {
             })}
 
             {/* Current user node (center, bigger) */}
-            <g>
+            <g
+              tabIndex={0}
+              role="button"
+              aria-label={`Your profile: ${userProfile.name}, ${userProfile.role}. Constellation center star.`}
+              style={{ outline: 'none' }}
+            >
               <circle
                 cx={currentPos.x}
                 cy={currentPos.y}
@@ -493,13 +524,16 @@ export function SkillConstellation() {
                 fill="var(--color-bg-elevated)"
               />
               <image
-                href={userProfile.avatar}
+                href={userProfile.avatar || getAvatarFallback(userProfile.name)}
                 x={currentPos.x - nodeRadius - 6}
                 y={currentPos.y - nodeRadius - 6}
                 width={(nodeRadius + 6) * 2}
                 height={(nodeRadius + 6) * 2}
                 clipPath="url(#clip-current)"
                 preserveAspectRatio="xMidYMid slice"
+                onError={(e) => {
+                  e.currentTarget.setAttribute('href', getAvatarFallback(userProfile.name));
+                }}
               />
               <text
                 x={currentPos.x}
@@ -556,9 +590,11 @@ export function SkillConstellation() {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <img
+                <SafeImage
                   src={user.avatar}
                   alt={user.name}
+                  type="avatar"
+                  name={user.name}
                   style={{ width: 48, height: 48, borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
                 />
                 <div>

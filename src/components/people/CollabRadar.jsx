@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { mockUsers } from '../../data/users';
 import { Radar, ArrowLeftRight, MessageSquare, UserPlus, Check, Zap } from 'lucide-react';
 
@@ -151,9 +152,11 @@ function CollabMatchCard({ match, onConnect, onMessage, onViewProfile, isFollowe
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.85rem' }}>
         <div style={{ position: 'relative' }}>
-          <img
+          <SafeImage
             src={user.avatar}
             alt={user.name}
+            type="avatar"
+            name={user.name}
             style={{ width: 44, height: 44, borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
           />
           {isBidirectional && (

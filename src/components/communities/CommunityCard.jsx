@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { Users, Check, Plus, Award } from 'lucide-react';
 
 export function CommunityCard({ community }) {
@@ -20,20 +21,29 @@ export function CommunityCard({ community }) {
       }}
     >
       {/* Cover Image */}
-      <div
+      <button
+        type="button"
+        aria-label={`View ${community.name} guild details`}
         style={{
           height: '110px',
           width: '100%',
           position: 'relative',
           background: 'var(--color-bg-elevated)',
           overflow: 'hidden',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          border: 'none',
+          padding: 0,
+          display: 'block',
+          textAlign: 'left'
         }}
         onClick={() => openModal('communityDetail', community)}
       >
-        <img
+        <SafeImage
           src={community.coverImage}
           alt={community.name}
+          type="cover"
+          title={community.name}
+          category={community.category}
           loading="lazy"
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
@@ -57,7 +67,7 @@ export function CommunityCard({ community }) {
         >
           {community.category}
         </span>
-      </div>
+      </button>
 
       {/* Body */}
       <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -86,15 +96,32 @@ export function CommunityCard({ community }) {
               style={{
                 fontSize: '1.05rem',
                 fontWeight: 700,
-                cursor: 'pointer',
                 lineHeight: 1.25,
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis'
               }}
-              onClick={() => openModal('communityDetail', community)}
             >
-              {community.name}
+              <button
+                type="button"
+                onClick={() => openModal('communityDetail', community)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  font: 'inherit',
+                  color: 'inherit',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  maxWidth: '100%',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: 'inline-block'
+                }}
+              >
+                {community.name}
+              </button>
             </h3>
           </div>
         </div>

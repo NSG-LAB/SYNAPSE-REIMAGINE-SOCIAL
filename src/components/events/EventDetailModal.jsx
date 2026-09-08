@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Modal } from '../common/Modal';
+import { SafeImage } from '../common/SafeImage';
 import { Calendar, Clock, MapPin, Zap, Check, Plus, CheckCircle2, Circle } from 'lucide-react';
 
 export function EventDetailModal() {
@@ -25,9 +26,12 @@ export function EventDetailModal() {
             background: 'var(--color-bg-elevated)'
           }}
         >
-          <img
+          <SafeImage
             src={event.coverImage}
             alt={event.title}
+            type="cover"
+            title={event.title}
+            category={event.category}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div
@@ -154,9 +158,11 @@ export function EventDetailModal() {
         {/* Organizer info */}
         <div style={{ padding: '1rem', background: 'var(--color-bg-elevated)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <img
+            <SafeImage
               src={event.organizer.avatar}
               alt={event.organizer.name}
+              type="avatar"
+              name={event.organizer.name}
               style={{ width: '40px', height: '40px', borderRadius: 'var(--radius-full)', objectFit: 'cover' }}
             />
             <div>

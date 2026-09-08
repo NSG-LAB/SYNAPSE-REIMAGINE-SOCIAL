@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
+import { SafeImage } from '../common/SafeImage';
 import { PostCard } from '../feed/PostCard';
 import { CommunityCard } from '../communities/CommunityCard';
 import { EventCard } from '../events/EventCard';
@@ -62,9 +63,11 @@ export function ProfileView() {
         <div style={{ padding: '0 1.5rem 1.5rem 1.5rem', position: 'relative' }}>
           {/* Avatar and Edit Button */}
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginTop: '-42px', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <img
+            <SafeImage
               src={userProfile.avatar}
               alt={userProfile.name}
+              type="avatar"
+              name={userProfile.name}
               style={{
                 width: '92px',
                 height: '92px',
