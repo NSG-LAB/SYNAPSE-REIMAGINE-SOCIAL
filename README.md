@@ -226,7 +226,7 @@ src/
    ```bash
    npm run lint
    ```
-   Runs Oxlint across all 61 project files (verified **0 warnings, 0 errors**).
+   Runs Oxlint across all 63 project files (verified **0 warnings, 0 errors**).
 
 5. Start local development server:
    ```bash

@@ -1,7 +1,7 @@
 import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { AppProvider, useApp } from '../context/AppContext';
+import { AppProvider } from '../context/AppContext';
 import { PostCard } from '../components/feed/PostCard';
 import { PostDetailModal } from '../components/feed/PostDetailModal';
 import { SkillConstellation } from '../components/constellation/SkillConstellation';
