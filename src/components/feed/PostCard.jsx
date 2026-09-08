@@ -126,7 +126,7 @@ export function PostCard({ post }) {
       </div>
 
       {/* Title */}
-      <h3
+      <h2
         style={{
           fontSize: '1.15rem',
           fontWeight: 700,
@@ -151,7 +151,7 @@ export function PostCard({ post }) {
         >
           {post.title}
         </button>
-      </h3>
+      </h2>
 
       {/* Content */}
       <p

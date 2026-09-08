@@ -167,9 +167,9 @@ export function PostDetailModal() {
 
         {/* Discussion Thread */}
         <div>
-          <h4 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem' }}>
             Discussion & Peer Insights ({post.comments?.length || 0})
-          </h4>
+          </h3>
 
           {/* New Reply Box */}
           <form onSubmit={handleCommentSubmit} style={{ display: 'flex', gap: '0.65rem', marginBottom: '1.5rem', width: '100%', alignItems: 'center' }}>

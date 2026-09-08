@@ -110,7 +110,7 @@ export function EventDetailModal() {
 
         {/* Overview */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>Challenge Brief & Goal</h4>
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.4rem' }}>Challenge Brief & Goal</h3>
           <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
             {event.description}
           </p>
@@ -119,9 +119,9 @@ export function EventDetailModal() {
         {/* Stages Checklist */}
         {event.stages && (
           <div style={{ marginBottom: '1.5rem' }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
               Sprint Milestones & Progression
-            </h4>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {event.stages.map((stage) => (
                 <div

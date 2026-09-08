@@ -51,7 +51,7 @@ export function PersonCard({ user }) {
             />
           </button>
           <div>
-            <h4
+            <h2
               style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.25 }}
             >
               <button
@@ -69,7 +69,7 @@ export function PersonCard({ user }) {
               >
                 {user.name}
               </button>
-            </h4>
+            </h2>
             <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>
               @{user.handle}
             </div>

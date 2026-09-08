@@ -101,7 +101,7 @@ export function CommunityDetailModal() {
 
         {/* Guild Description & Tagline */}
         <div style={{ marginBottom: '1.5rem' }}>
-          <h4 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.4rem' }}>Guild Manifesto</h4>
+          <h3 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.4rem' }}>Guild Manifesto</h3>
           <p style={{ fontSize: '0.9375rem', lineHeight: 1.6, color: 'var(--color-text-secondary)', marginBottom: '0.75rem' }}>
             {community.description}
           </p>
@@ -178,9 +178,9 @@ export function CommunityDetailModal() {
         {/* Community Discussions Stream */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 700 }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>
               Live Guild Discussions ({communityPosts.length})
-            </h4>
+            </h3>
             <button
               onClick={() => {
                 closeModal();

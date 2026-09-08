@@ -148,9 +148,9 @@ export function ProfileDetailModal() {
         {/* Recent Activity Sparks */}
         {userSparks.length > 0 && (
           <div>
-            <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
+            <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem' }}>
               Recent Contributions ({userSparks.length})
-            </h4>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               {userSparks.map(spark => (
                 <div

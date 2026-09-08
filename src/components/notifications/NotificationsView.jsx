@@ -70,7 +70,7 @@ export function NotificationsView() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Activity & Notifications</h2>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Activity & Notifications</h1>
           <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
             Stay updated with your active challenges, guild invites, and peer collaborations
           </p>

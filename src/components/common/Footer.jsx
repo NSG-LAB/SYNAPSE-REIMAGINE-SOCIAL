@@ -50,9 +50,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)', marginBottom: '0.85rem' }}>
+          <h3 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)', marginBottom: '0.85rem' }}>
             Platform Pillars
-          </h4>
+          </h3>
           <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem' }}>
             <li>
               <button onClick={() => setCurrentView('discover')} className="btn-ghost" style={{ padding: 0 }}>
@@ -78,9 +78,9 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)', marginBottom: '0.85rem' }}>
+          <h3 style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)', marginBottom: '0.85rem' }}>
             Core Philosophy
-          </h4>
+          </h3>
           <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '0.5rem' }}>
             Designed to eradicate passive doomscrolling by shifting rewards to active proof-of-work, shared challenges, and genuine creative fellowship.
           </p>

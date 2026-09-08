@@ -19,7 +19,7 @@ export function SettingsView() {
   return (
     <div style={{ maxWidth: '780px', margin: '0 auto' }}>
       <div style={{ marginBottom: '1.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Platform Settings & Preferences</h2>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 800 }}>Platform Settings & Preferences</h1>
         <p style={{ fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
           Customize your SYNAPSE environment, visual aesthetics, and local data settings
         </p>
@@ -36,9 +36,9 @@ export function SettingsView() {
           border: '1px solid var(--border-subtle)'
         }}
       >
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Sun size={18} color="var(--color-accent-amber)" /> Visual Aesthetics & Themes
-        </h3>
+        </h2>
         <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', marginBottom: '1.25rem' }}>
           Select the display mode that suits your lighting and workspace preference.
         </p>
@@ -132,9 +132,9 @@ export function SettingsView() {
           border: '1px solid var(--border-subtle)'
         }}
       >
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Shield size={18} color="var(--color-accent-emerald)" /> Privacy & Participation Defaults
-        </h3>
+        </h2>
         <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', marginBottom: '1.25rem' }}>
           Decide how other creators discover your profile and match with your offered skills.
         </p>
@@ -180,9 +180,9 @@ export function SettingsView() {
           border: '1px solid var(--border-subtle)'
         }}
       >
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <h2 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Database size={18} color="var(--color-accent-rose)" /> Local State Management
-        </h3>
+        </h2>
         <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', marginBottom: '1.25rem' }}>
           All your contributions, joined guilds, votes, and messages are stored locally in your browser’s localStorage.
         </p>

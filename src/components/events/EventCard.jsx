@@ -105,7 +105,7 @@ export function EventCard({ event }) {
       {/* Content */}
       <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
         {/* Title */}
-        <h3
+        <h2
           style={{
             fontSize: '1.1rem',
             fontWeight: 700,
@@ -130,7 +130,7 @@ export function EventCard({ event }) {
           >
             {event.title}
           </button>
-        </h3>
+        </h2>
 
         {/* Meta Line: Location & Difficulty */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.78rem', color: 'var(--color-text-muted)', marginBottom: '0.75rem', flexWrap: 'wrap' }}>

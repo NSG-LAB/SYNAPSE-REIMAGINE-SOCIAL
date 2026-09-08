@@ -81,7 +81,7 @@ export function MessagesView() {
         {/* Header */}
         <div style={{ padding: '1rem 0.85rem 0.65rem 0.85rem', borderBottom: '1px solid var(--border-subtle)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.65rem' }}>
-            <h2 style={{ fontSize: '1.15rem', fontWeight: 800 }}>Messages</h2>
+            <h1 style={{ fontSize: '1.15rem', fontWeight: 800 }}>Messages</h1>
             <span className="badge badge-indigo" style={{ fontSize: '0.68rem' }}>
               {conversations.length} circles
             </span>

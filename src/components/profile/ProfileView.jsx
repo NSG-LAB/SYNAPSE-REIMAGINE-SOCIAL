@@ -72,7 +72,7 @@ export function ProfileView() {
           </div>
 
           {/* User Names & Role */}
-          <h2 className="profile-title">{userProfile.name}</h2>
+          <h1 className="profile-title">{userProfile.name}</h1>
           <div className="profile-handle">
             @{userProfile.handle}
           </div>

@@ -50,7 +50,7 @@ export function MobileNav() {
               justifyContent: 'center',
               gap: '2px',
               padding: '0.35rem 0',
-              color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
+              color: isActive ? 'var(--color-primary-text)' : 'var(--color-text-muted)',
               position: 'relative',
               flex: 1,
               background: 'none'
@@ -68,7 +68,7 @@ export function MobileNav() {
                 transition: 'background-color var(--transition-fast)'
               }}
             >
-              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.8} color={isActive ? 'var(--color-primary)' : 'currentColor'} />
+              <Icon size={20} strokeWidth={isActive ? 2.5 : 1.8} color={isActive ? 'var(--color-primary-text)' : 'currentColor'} />
               {item.badge > 0 && (
                 <span
                   style={{
@@ -83,7 +83,7 @@ export function MobileNav() {
                 />
               )}
             </div>
-            <span style={{ fontSize: '0.68rem', fontWeight: isActive ? 700 : 500, color: isActive ? 'var(--color-primary)' : 'inherit' }}>
+            <span style={{ fontSize: '0.68rem', fontWeight: isActive ? 700 : 500, color: isActive ? 'var(--color-primary-text)' : 'inherit' }}>
               {item.label}
             </span>
           </button>

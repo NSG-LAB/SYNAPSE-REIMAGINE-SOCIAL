@@ -89,7 +89,7 @@ export function CommunityCard({ community }) {
           </div>
 
           <div style={{ paddingTop: '1.25rem', flex: 1, minWidth: 0 }}>
-            <h3
+            <h2
               style={{
                 fontSize: '1.05rem',
                 fontWeight: 700,
@@ -119,7 +119,7 @@ export function CommunityCard({ community }) {
               >
                 {community.name}
               </button>
-            </h3>
+            </h2>
           </div>
         </div>
 

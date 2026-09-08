@@ -54,7 +54,7 @@ export function EmptyState({
       </div>
 
       <div>
-        <h3 style={{ fontSize: '1.25rem', marginBottom: '0.4rem', fontWeight: 700 }}>{title}</h3>
+        <h2 style={{ fontSize: '1.25rem', marginBottom: '0.4rem', fontWeight: 700 }}>{title}</h2>
         <p style={{ maxWidth: '440px', margin: '0 auto', fontSize: '0.925rem', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
           {description}
         </p>
