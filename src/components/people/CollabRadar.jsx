@@ -394,13 +394,6 @@ export function CollabRadar({ compact = false, maxResults = 8 }) {
           </div>
         ))}
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.6; }
-        }
-      `}</style>
     </div>
   );
 }

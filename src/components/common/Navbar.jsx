@@ -339,39 +339,6 @@ export function Navbar() {
         </div>
         </div>
       </div>
-
-      {/* Responsive layout CSS rules for header */}
-      <style>{`
-        @media (min-width: 900px) {
-          .desktop-nav-links {
-            display: flex !important;
-          }
-          .search-bar-container {
-            display: block !important;
-          }
-        }
-        @media (max-width: 899px) {
-          .hide-on-mobile-icon {
-            display: none !important;
-          }
-        }
-        @media (max-width: 639px) {
-          .hide-on-mobile {
-            display: none !important;
-          }
-          .spark-action-btn {
-            padding: 0 !important;
-            width: 36px !important;
-            height: 36px !important;
-            justify-content: center !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .hide-on-mobile-subtitle {
-            display: none !important;
-          }
-        }
-      `}</style>
     </header>
   );
 }

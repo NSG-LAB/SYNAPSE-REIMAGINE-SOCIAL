@@ -45,11 +45,53 @@ import { CommunityDetailModal } from './components/communities/CommunityDetailMo
 import { EventDetailModal } from './components/events/EventDetailModal';
 import { ProfileDetailModal } from './components/people/ProfileDetailModal';
 import { EditProfileModal } from './components/profile/EditProfileModal';
+import { KeyboardShortcutsModal } from './components/common/KeyboardShortcutsModal';
 
 import { PageSkeleton } from './components/common/PageSkeleton';
 
 function MainContent() {
-  const { currentView } = useApp();
+  const { currentView, activeModal, openModal, closeModal, setCurrentView, setTheme } = useApp();
+
+  // Global Keyboard Shortcuts
+  React.useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      const tag = document.activeElement?.tagName?.toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select' || document.activeElement?.isContentEditable) {
+        return;
+      }
+
+      if (e.key === '?' || (e.shiftKey && e.key === '/')) {
+        e.preventDefault();
+        if (activeModal?.type === 'keyboardShortcuts') {
+          closeModal();
+        } else {
+          openModal('keyboardShortcuts');
+        }
+      } else if (e.key === '1') {
+        setCurrentView('discover');
+      } else if (e.key === '2') {
+        setCurrentView('communities');
+      } else if (e.key === '3') {
+        setCurrentView('events');
+      } else if (e.key === '4') {
+        setCurrentView('people');
+      } else if (e.key === '5') {
+        setCurrentView('messages');
+      } else if (e.key === 'c' || e.key === 'C') {
+        e.preventDefault();
+        openModal('createPost');
+      } else if (e.key === 'g' || e.key === 'G') {
+        e.preventDefault();
+        openModal('createCommunity');
+      } else if (e.key === 't' || e.key === 'T') {
+        e.preventDefault();
+        setTheme(t => (t === 'dark' ? 'light' : t === 'light' ? 'midnight' : 'dark'));
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [activeModal?.type, openModal, closeModal, setCurrentView, setTheme]);
 
   const renderView = () => {
     switch (currentView) {
@@ -117,6 +159,10 @@ function MainContent() {
       <EventDetailModal />
       <ProfileDetailModal />
       <EditProfileModal />
+      <KeyboardShortcutsModal
+        isOpen={activeModal?.type === 'keyboardShortcuts'}
+        onClose={closeModal}
+      />
     </div>
   );
 }

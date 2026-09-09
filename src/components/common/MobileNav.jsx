@@ -89,14 +89,6 @@ export function MobileNav() {
           </button>
         );
       })}
-
-      <style>{`
-        @media (min-width: 900px) {
-          .mobile-bottom-nav {
-            display: none !important;
-          }
-        }
-      `}</style>
     </nav>
   );
 }

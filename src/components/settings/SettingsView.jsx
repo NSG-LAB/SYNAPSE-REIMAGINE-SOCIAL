@@ -43,7 +43,7 @@ export function SettingsView() {
           Select the display mode that suits your lighting and workspace preference.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.85rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))', gap: '0.85rem' }}>
           {/* Dark */}
           <button
             onClick={() => setTheme('dark')}

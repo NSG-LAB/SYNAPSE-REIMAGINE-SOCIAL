@@ -5,14 +5,16 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-22c55e.svg?style=for-the-badge&logo=github)](https://nsg-lab.github.io/SYNAPSE-REIMAGINE-SOCIAL/)
 [![Built with React](https://img.shields.io/badge/Built%20with-React%2019-61dafb.svg)](https://react.dev/)
 [![Bundled with Vite](https://img.shields.io/badge/Bundled%20with-Vite%208-646cff.svg)](https://vitejs.dev/)
-[![Tested with Vitest](https://img.shields.io/badge/Tested%20with-Vitest%20(42%20tests)-facc15.svg)](https://vitest.dev/)
+[![Tested with Vitest](https://img.shields.io/badge/Tested%20with-Vitest%20(52%20tests)-facc15.svg)](https://vitest.dev/)
 [![Axe Accessibility](https://img.shields.io/badge/Axe%20DevTools-0%20Violations-10b981.svg)](https://www.deque.com/axe/)
 [![Linted with Oxlint](https://img.shields.io/badge/Lint-Oxlint%20(0%20warnings)-10b981.svg)](https://oxc.rs/)
+[![Architecture](https://img.shields.io/badge/Architecture-System%20Blueprint-8b5cf6.svg)](./ARCHITECTURE.md)
 [![Styling](https://img.shields.io/badge/Styling-Vanilla%20CSS%20Design%20System-38bdf8.svg)](./src/styles/index.css)
 [![Persistence](https://img.shields.io/badge/Persistence-HTML5%20LocalStorage-10b981.svg)](./src/hooks/useLocalStorage.js)
 [![Challenge](https://img.shields.io/badge/Submission-REIMAGINE%20SOCIAL%20Challenge-f43f5e.svg)](#)
 
 > 🚀 **Experience the Live App**: [https://nsg-lab.github.io/SYNAPSE-REIMAGINE-SOCIAL/](https://nsg-lab.github.io/SYNAPSE-REIMAGINE-SOCIAL/)
+> 🏛️ **Technical Architecture Blueprint**: [ARCHITECTURE.md](./ARCHITECTURE.md) | 📜 **Changelog**: [CHANGELOG.md](./CHANGELOG.md) | 🤝 **Contributing**: [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ---
 
@@ -36,7 +38,7 @@ Traditional social networks optimize for **passive consumption, algorithmic outr
 - **Algorithm**: A custom force-directed spring simulation that computes skill affinity vectors, pulling creators with overlapping superpowers into organic galaxies while pushing dissimilar nodes apart.
 - **Interactive Mechanics**:
   - **Dynamic Connections**: Pulsing green connection lines illuminate mutual skill synergies between you and other creators.
-  - **Interactive Node Exploration**: Click any star to open their synergy dossier, view who-can-help-whom, and 1-click connect or direct message.
+  - **Interactive Node Exploration**: Click any star to trigger procedural glass chime sound feedback, open their synergy dossier, view who-can-help-whom, and 1-click connect or direct message.
   - **Spatial Controls**: Full zoom (+/-) and drag-to-pan viewport controls with touch gesture support for mobile devices.
 
 ### 2. 🤝 Collaboration Radar (Bidirectional Skill Matching Engine)
@@ -54,6 +56,22 @@ Traditional social networks optimize for **passive consumption, algorithmic outr
   - Join a Topic Guild: **+30 XP**
   - Enlist in a Challenge Sprint: **+40 XP**
 - **Level Progression**: Dynamic rank tiers from *Fresh Explorer* (Lv. 1) to *Legendary Architect* (Lv. 10+), tracked with animated shimmer progress bars, confetti celebrations, and daily action checklists.
+
+### 4. 🎹 Procedural Web Audio Synthesis Engine
+- **Concept**: Zero-dependency procedural sound synthesis powered by the HTML5 Web Audio API (`src/utils/soundEffects.js`).
+- **Sonic Micro-Interactions**:
+  - Dual-oscillator glass chime on Constellation star synergy selection.
+  - Harmonic chord progression on sprint milestones and confetti celebrations.
+  - Tactile acoustic click on spark appreciation and bookmark actions.
+  - Respects mute preferences in localStorage and Settings.
+
+### 5. ⌨️ Global Power-User Keyboard Shortcuts
+- Press <kbd>?</kbd> anytime to open the interactive cheat sheet:
+  - <kbd>1</kbd>–<kbd>5</kbd>: Quick switch between Discover, Guilds, Challenges, People, and Messages.
+  - <kbd>c</kbd>: Quick compose Action Spark / Poll.
+  - <kbd>g</kbd>: Launch new Topic Guild.
+  - <kbd>t</kbd>: Cycle themes (Dark / Porcelain / OLED Midnight).
+  - <kbd>Esc</kbd>: Instantly dismiss active dialog and restore button focus.
 
 ---
 
@@ -209,7 +227,9 @@ src/
    ```bash
    npm test
    ```
-   Runs 11 test suites and 42 automated tests via Vitest & React Testing Library:
+   Runs **13 test suites and 52 automated tests** via Vitest & React Testing Library:
+   - `responsiveDesign.test.jsx`: Audits `index.css` coverage across all 11 standardized breakpoint tiers (320px–1440px), enforces zero `<style>` tags in JSX, verifies single `<main>` landmark, and tests shortcuts modal.
+   - `appContextActions.test.jsx`: Validates global state dispatchers (`toggleLike`, `toggleSave`, `toggleJoinCommunity`, `toggleJoinEvent`, `toggleFollowUser`, `gainXP`, and modal handlers).
    - `liveFlowSimulation.test.jsx`: End-to-end keyboard journey (Discover -> PostCard Enter -> Dialog open -> Poll vote -> Escape -> Focus restoration) & Skill Constellation screen reader live region announcements.
    - `axeAccessibility.test.jsx`: Automated Axe DevTools scan across Modal, EmptyState, OnboardingBanner, and PostCard (0 critical or serious violations).
    - `Modal.test.jsx`: Dialog ARIA attributes, Escape handling, Tab focus trap wrapping, and trigger focus restoration.
@@ -226,7 +246,7 @@ src/
    ```bash
    npm run lint
    ```
-   Runs Oxlint across all 63 project files (verified **0 warnings, 0 errors**).
+   Runs Oxlint across all 67 project files (verified **0 warnings, 0 errors**).
 
 5. Start local development server:
    ```bash

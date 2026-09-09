@@ -3,6 +3,7 @@ import { useApp } from '../../context/AppContext';
 import { mockUsers } from '../../data/users';
 import { SafeImage } from '../common/SafeImage';
 import { getAvatarFallback } from '../../utils/imageFallback';
+import { soundEffects } from '../../utils/soundEffects';
 import { MessageSquare, UserPlus, X, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 
 // Simple seeded random for deterministic layouts
@@ -114,9 +115,10 @@ export function SkillConstellation() {
     const updateDimensions = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
+        const availableWidth = Math.max(Math.floor(rect.width) || 300, 240);
         setDimensions({
-          width: Math.max(rect.width, 320),
-          height: Math.max(Math.min(rect.width * 0.65, 600), 350)
+          width: availableWidth,
+          height: Math.max(Math.min(availableWidth * 0.65, 600), 300)
         });
       }
     };
@@ -417,6 +419,7 @@ export function SkillConstellation() {
                       e.preventDefault();
                       const next = selectedUser === user.id ? null : user.id;
                       setSelectedUser(next);
+                      if (next) soundEffects.playNodeSelect();
                       setLiveAnnouncement(next ? `Inspecting ${user.name}. View profile button is available.` : 'Deselected maker.');
                     }
                   }}
@@ -424,6 +427,7 @@ export function SkillConstellation() {
                     e.stopPropagation();
                     const next = selectedUser === user.id ? null : user.id;
                     setSelectedUser(next);
+                    if (next) soundEffects.playNodeSelect();
                     setLiveAnnouncement(next ? `Inspecting ${user.name}.` : 'Deselected maker.');
                   }}
                 >
@@ -692,13 +696,6 @@ export function SkillConstellation() {
           </div>
         );
       })()}
-
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }

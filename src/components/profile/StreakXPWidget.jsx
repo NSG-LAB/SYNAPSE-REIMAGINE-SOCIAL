@@ -314,13 +314,6 @@ export function StreakXPWidget({ compact = false }) {
           </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(200%); }
-        }
-      `}</style>
     </div>
   );
 }

@@ -284,7 +284,7 @@ export function DiscoverPage() {
       <FilterBar />
 
       {/* Feed Stream */}
-      <main aria-label="Sparks and Discussions Feed">
+      <section aria-label="Sparks and Discussions Feed">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <PostCard key={post.id} post={post} />
@@ -302,18 +302,7 @@ export function DiscoverPage() {
             }}
           />
         )}
-      </main>
-
-      <style>{`
-        @media (max-width: 540px) {
-          .hide-on-mobile-text {
-            display: none !important;
-          }
-          .spark-banner-btn {
-            padding: 0.35rem 0.5rem !important;
-          }
-        }
-      `}</style>
+      </section>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export function PageSkeleton() {
       />
 
       {/* Grid of Skeleton Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
         {[1, 2, 3].map((i) => (
           <div key={i} className="skeleton-card glass-panel">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
